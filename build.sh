@@ -20,7 +20,7 @@ firewall-cmd --zone=public --add-port=8000/tcp --permanent
 firewall-cmd --reload
 
 echo Starting docker containers
-cd /CTF-scoreboard/build
+cd /CTF-scoreboard/src
 docker-compose up
 
 

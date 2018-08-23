@@ -8,6 +8,6 @@ ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 
 # Move all of the django project files in there
-COPY /CTF-scoreboard/src/ /code
+COPY * /code/
 EXPOSE 8000
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
