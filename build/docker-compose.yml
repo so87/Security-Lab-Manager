@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  db:
+    restart: always
+    privileged: true
+    image: postgres
+    container_name: django_db
+    ports:
+      - "5555:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres_pass 
+    volumes:
+      - /CTF-scoreboard/data/:/data/web
+  web:
+    restart: always
+    privileged: true
+    build: django/
+    container_name: django_server
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+networks:
+  djangonet:
+    driver: bridge
