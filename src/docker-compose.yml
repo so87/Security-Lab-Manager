@@ -14,17 +14,17 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - data/:/var/lib/postgresql
+      - ./data/:/var/lib/postgresql
   web_django:
     restart: always
     privileged: true
-    build: src/
+    build: .
     container_name: django_server
     networks:
       - djangonet
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - src/:/code
+      - ./:/code
     ports:
       - "8000:8000"
     depends_on:
@@ -34,6 +34,4 @@ networks:
   djangonet:
     driver: bridge
     
-volumes:
-   data:
-   src:
+
