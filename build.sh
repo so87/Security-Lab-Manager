@@ -12,15 +12,9 @@ systemctl enable docker
 sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-echo Moving files to the correct place
-mv * /CTF-scoreboard/
-
 echo Opening firewall
 firewall-cmd --zone=public --add-port=8000/tcp --permanent
 firewall-cmd --reload
 
 echo Starting docker containers
-cd /CTF-scoreboard/src
-docker-compose up
-
-
+docker-compose up -d
