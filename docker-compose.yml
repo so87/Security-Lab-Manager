@@ -14,22 +14,26 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - /CTF-scoreboard/data/:/data/web
+      - data/:/var/lib/postgresql
   web_django:
     restart: always
     privileged: true
-    build: .
+    build: src/
     container_name: django_server
     networks:
       - djangonet
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - /CTF-scoreboard/src/:/code
+      - src/:/code
     ports:
       - "8000:8000"
     depends_on:
-      - db_django
-
+      - db_django   
+ 
 networks:
   djangonet:
     driver: bridge
+    
+volumes:
+   data:
+   src:
