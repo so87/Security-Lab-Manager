@@ -1,0 +1,25 @@
+1. download docker https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe
+
+2. don't use windows containers
+
+3. have it log you out and log back in 
+
+4. search for docker for windows. run it as admin
+
+5. click ok to enable. you will restart. do not disable any security settings. hyper v and virtualization can work without disabling security settings.
+
+6. launch docker for windows again
+
+7. login with your docker account
+
+8. docker --version should work
+
+9. launch an admin command prompt everytime you want to do docker commands
+
+10 . docker run hello-world should work
+
+11. FOR VOLUMES
+go to system try
+click settings on docker
+shared drives
+check the "c" box and click apply
