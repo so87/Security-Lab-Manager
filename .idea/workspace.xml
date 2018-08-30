@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d47f1d2d-2cfb-4523-b5c4-127b3387e4fc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CTF-scoreboard.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CTF-scoreboard.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.bat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dockerfile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,14 +43,16 @@
     <session id="1819761626">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Dockerfile" value="13" />
-          <entry key="conf" value="2" />
+          <entry key="conf" value="3" />
           <entry key="py" value="2" />
           <entry key="yml" value="1" />
         </counts>
@@ -63,7 +60,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Dockerfile" value="13" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
           <entry key="Python" value="2" />
           <entry key="YAML" value="1" />
         </counts>
@@ -72,43 +69,25 @@
         <counts>
           <entry key="Dockerfile" value="218" />
           <entry key="conf" value="344" />
-          <entry key="yml" value="547" />
+          <entry key="yml" value="709" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dockerfile" value="218" />
           <entry key="PLAIN_TEXT" value="344" />
-          <entry key="YAML" value="547" />
+          <entry key="YAML" value="709" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nginx/nginx.conf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="34" column="1" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/A_MainSite/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="80" column="25" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
+            <state relative-caret-position="45">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -131,8 +110,8 @@
         <option value="$PROJECT_DIR$/src/Dockerfile" />
         <option value="$PROJECT_DIR$/nginx/Dockerfile" />
         <option value="$PROJECT_DIR$/postgresql/Dockerfile" />
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/nginx/nginx.conf" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
       </list>
     </option>
   </component>
@@ -165,16 +144,6 @@
               <item name="Security-Lab-Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Security-Lab-Manager" type="462c0819:PsiDirectoryNode" />
               <item name="nginx" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Security-Lab-Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security-Lab-Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="postgresql" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Security-Lab-Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security-Lab-Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -261,11 +230,9 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18710022" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18923241" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="SonarQube" />
-      <window_info anchor="bottom" id="SonarLint" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
@@ -273,12 +240,14 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
-      <window_info anchor="bottom" id="Docker" order="7" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Docker" order="7" weight="0.329718" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30911064" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30911064" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="SonarQube" order="13" />
+      <window_info anchor="bottom" id="SonarLint" order="14" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -309,13 +278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/A_MainSite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="80" column="25" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -323,17 +285,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/A_MainSite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="80" column="25" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nginx/nginx.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="34" column="1" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+        <state relative-caret-position="209">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        <state relative-caret-position="45">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
         </state>
       </provider>
     </entry>

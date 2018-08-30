@@ -12,8 +12,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./data/:/var/lib/postgresql
-      - ./data/postgresql_data:/var/lib/postgresql/data
+      - postgresql:/var/lib/postgresql
+      - postgresql-data:/var/lib/postgresql_data
     networks:
     - djangonet
   web:
@@ -42,6 +42,9 @@ services:
     depends_on:
     - web
 
+volumes:
+  postgresql:
+  postgresql-data:
     
 networks:
   djangonet:
