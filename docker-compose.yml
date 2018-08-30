@@ -4,47 +4,46 @@ services:
   db_django:
     restart: always
     privileged: true
-    image: postgres
+    build:
+      context: ./postgresql
+      dockerfile: Dockerfile
     container_name: django_db
-    networks: 
-      - djangonet
-    ports:
-      - "5555:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./data/:/var/lib/postgresql
       - ./data/postgresql_data:/var/lib/postgresql/data
-  web_django:
+    networks:
+    - djangonet
+  web:
     restart: always
     privileged: true
+    command: bash -c "python3 manage.py runserver 0.0.0.0:8080"
     build: ./src
     container_name: django_server
-    networks:
-      - djangonet
-    command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./src:/code
-    ports:
-      - "8000:8000"
+    networks:
+    - djangonet
     depends_on:
-      - db_django   
-  nginx: 
+    - db_django
+  nginx:
     restart: always
     container_name: nginx_server
     build:
       context: ./nginx/
       dockerfile: Dockerfile
-    depends_on:
-      - web_django
     ports:
-      - "80:80"
-      - "443:443"
+    - "80:80"
+    - "8443:443"
+    networks:
+    - djangonet
+    depends_on:
+    - web
 
- 
+    
 networks:
   djangonet:
     driver: bridge
-    
 
