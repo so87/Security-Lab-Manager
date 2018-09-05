@@ -1,13 +1,13 @@
 version: '3.1'
 
 services:
-  db_django:
+  db-django:
     restart: always
     privileged: true
     build:
       context: ./postgresql
       dockerfile: Dockerfile
-    container_name: django_db
+    container_name: standalone-db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -16,21 +16,21 @@ services:
       - postgresql-data:/var/lib/postgresql_data
     networks:
     - djangonet
-  web:
+  web-django:
     restart: always
     privileged: true
     command: bash -c "python3 manage.py runserver 0.0.0.0:8080"
     build: ./src
-    container_name: django_server
+    container_name: standlone-django
     volumes:
       - ./src:/code
     networks:
     - djangonet
     depends_on:
-    - db_django
-  nginx:
+    - db-django
+  nginx-django:
     restart: always
-    container_name: nginx_server
+    container_name: standlone-nginx
     build:
       context: ./nginx/
       dockerfile: Dockerfile
@@ -40,7 +40,7 @@ services:
     networks:
     - djangonet
     depends_on:
-    - web
+    - web-django
 
 volumes:
   postgresql:
