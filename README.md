@@ -1,5 +1,12 @@
 # CTF-scoreboard
-[![Build Status](https://jenkins.owens-netsec.com/buildStatus/icon?job=Continuous-Integration-CTF)](https://jenkins.owens-netsec.com/job/Continuous-Integration-CTF/)
+[![Build Status](https://jenkins.owens-netsec.com/buildStatus/icon?job=Continuous-Integration-CTF)](https://jenkins.owens-netsec.com/job/Continuous-Integration-CTF/) 
+[![Quality Gate](https://sonarqube.owens-netsec.com/api/badges/gate?key=ctfscoreboard)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard/)
+[![Vulnerabilities](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=vulnerabilities)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
+[![bugs](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=bugs)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
+[![code_smells](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=code_smells)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
+[![coverage](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=coverage)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
+[![lines](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=lines)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
+
 
 This is my senior project at the University of Evansville.  This application is meant to be easily run by educators and enthusiasts to learn security.  Users can launch security exercises.  If they complete the exercise, they can submit their unique value to the application.  Administrators can login to see if users completed their exercises.
 
