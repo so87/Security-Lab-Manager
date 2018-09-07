@@ -1,4 +1,4 @@
-# CTF-scoreboard
+# Security Lab Manager
 [![Build Status](https://jenkins.owens-netsec.com/buildStatus/icon?job=Continuous-Integration-CTF)](https://jenkins.owens-netsec.com/job/Continuous-Integration-CTF/) 
 [![Quality Gate](https://sonarqube.owens-netsec.com/api/badges/gate?key=ctfscoreboard)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard/)
 [![Vulnerabilities](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=vulnerabilities)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
