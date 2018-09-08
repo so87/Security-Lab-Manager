@@ -1,3 +1,2 @@
 data/*
 !data/README
-src/A_MainSite/settings.py
