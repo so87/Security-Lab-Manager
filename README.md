@@ -6,7 +6,10 @@
 [![code_smells](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=code_smells)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
 [![coverage](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=coverage)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
 [![lines](https://sonarqube.owens-netsec.com/api/badges/measure?key=ctfscoreboard&metric=lines)](https://sonarqube.owens-netsec.com/dashboard/index/ctfscoreboard)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/so87/Security-Lab-Manager.svg?columns=all)](https://waffle.io/so87/Security-Lab-Manager)
+[![GitHub issues](https://img.shields.io/github/issues/so87/Security-Lab-Manager.svg)](https://github.com/so87/Security-Lab-Manager/issues)
 
+[![GitHub license](https://img.shields.io/github/license/so87/Security-Lab-Manager.svg)](https://github.com/so87/Security-Lab-Manager)
 
 This is my senior project at the University of Evansville.  This application is meant to be easily run by educators and enthusiasts to learn security.  Users can launch security exercises.  If they complete the exercise, they can submit their unique value to the application.  Administrators can login to see if users completed their exercises.
 
