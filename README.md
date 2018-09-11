@@ -22,3 +22,8 @@ You need to run everything as administrator.  There are security implications to
 1. run "git clone https://github.com/so87/Security-Lab-Manager.git"
 2. run "build-windows.bat" or "build-linux.sh" depending on whether you are linux or windows
 3. if you need to stop or stop run "start-stop-windows.bat" or "start-stop-linux.sh" and that's it!
+
+# How can I contribute, request an enhancement, or report a bug?
+[Contributing](https://github.com/so87/Security-Lab-Manager/blob/dev/.github/CONTRIBUTTING.md) </br>
+[Pull Request](https://github.com/so87/Security-Lab-Manager/blob/dev/.github/PULL_REQUEST_TEMPLATE.md) </br>
+[Issue Template](https://github.com/so87/Security-Lab-Manager/blob/dev/.github/ISSUE_TEMPLATE.md) </br>
