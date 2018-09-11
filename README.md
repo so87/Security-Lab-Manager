@@ -11,9 +11,14 @@
 
 [![GitHub license](https://img.shields.io/github/license/so87/Security-Lab-Manager.svg)](https://github.com/so87/Security-Lab-Manager)
 
+## Description
 This is my senior project at the University of Evansville.  This application is meant to be easily run by educators and enthusiasts to learn security.  Users can launch security exercises.  If they complete the exercise, they can submit their unique value to the application.  Administrators can login to see if users completed their exercises.
+## Architecture
+<p align="center">
+  <img width="760" height="760" src="https://github.com/so87/Security-Lab-Manager/blob/dev/documentation/high-level-design.PNG">
+</p>
 
-# How can I run this?
+## How can I run this?
 This system can be run on both Centos7(ubuntu coming soon) and Windows because of docker!  If you run on windows, make sure docker for windows is installed: https://docs.docker.com/docker-for-windows/install/ . Also make sure that you meet all requirements.  If you run on linux, you are all good to go!  My build script installs docker for you.
 </br>
 </br>
@@ -23,7 +28,14 @@ You need to run everything as administrator.  There are security implications to
 2. run "build-windows.bat" or "build-linux.sh" depending on whether you are linux or windows
 3. if you need to stop or stop run "start-stop-windows.bat" or "start-stop-linux.sh" and that's it!
 
-# How can I contribute, request an enhancement, or report a bug?
+## How can I contribute, request an enhancement, or report a bug?
 [Contributing](https://github.com/so87/Security-Lab-Manager/blob/dev/.github/CONTRIBUTTING.md) </br>
 [Pull Request](https://github.com/so87/Security-Lab-Manager/blob/dev/.github/PULL_REQUEST_TEMPLATE.md) </br>
 [Issue Template](https://github.com/so87/Security-Lab-Manager/blob/dev/.github/ISSUE_TEMPLATE.md) </br>
+
+## How does all of this get developed and deployed by you?
+Below is my high level development and deployment process.  I have a CI build and a nightly build to deploy production.
+<p align="center">
+  <img width="1000" height="500" src="https://github.com/so87/Security-Lab-Manager/blob/dev/documentation/dev-deploy-process.PNG">
+</p>
+
