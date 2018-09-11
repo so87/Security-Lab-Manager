@@ -9,6 +9,6 @@
 ### Related code:
 insert short code snippets here
 
-##Other information:
+### Other information:
 
 

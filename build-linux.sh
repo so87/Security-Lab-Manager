@@ -13,7 +13,7 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 
 echo Opening firewall
-firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-port=8443/tcp --permanent
 firewall-cmd --reload
 
