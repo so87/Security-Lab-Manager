@@ -1,10 +1,16 @@
-$path = 'c:\Security-Lab-Manager\documentation'
-$wd = New-Object -ComObject Word.Application
-Get-ChildItem -Path $path -Include *.doc, *.docx -Recurse |
-	ForEach-Object {
-		$doc = $wd.Documents.Open($_.Fullname)
-		$pdf = $_.FullName -replace $_.Extension, '.pdf'
-		$doc.ExportAsFixedFormat($pdf,17,$false,0,3,1,1,0,$false, $false,0,$false, $true)
-		$doc.Close()
-	}
-$wd.Quit()
+$documents_path = 'c:\Security-Lab-Manager\documentation'
+$word_app = New-Object -ComObject Word.Application
+
+# This filter will find .doc as well as .docx documents
+Get-ChildItem -Path $documents_path -Filter *.doc? | ForEach-Object {
+
+    $document = $word_app.Documents.Open($_.FullName)
+
+    $pdf_filename = "$($_.DirectoryName)\$($_.BaseName).pdf"
+
+    $document.SaveAs([ref] $pdf_filename, [ref] 17)
+
+    $document.Close()
+}
+
+$word_app.Quit()
