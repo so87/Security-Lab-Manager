@@ -13,3 +13,9 @@ J
 src/A_MainSite/settings.py,0\a\0a9df43edffb4b20d498dea186af082323ab4977
 M
 src/A_MainSite/secret_key.txt,0\b\0babb115e86c0e590e0df77a50a618f96c266e5e
+H
+src/production_deploy.sh,f\0\f0d84f34d95aba25f1b61e95667354bf1278b371
+A
+build-windows.bat,5\0\50867e9ecb7197189c20c4b22b10b53bf9f715cc
+F
+src/A_MainSite/urls.py,d\3\d398b5d6f0e92c269bac14590a08e5348f51a2fc
