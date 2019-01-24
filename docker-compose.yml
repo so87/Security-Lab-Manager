@@ -2,51 +2,42 @@ version: '3.1'
 
 services:
   db-django:
+    image: simonowens157/postgresql:v1.0
     restart: always
-    privileged: true
-    build:
-      context: ./postgresql
-      dockerfile: Dockerfile
     container_name: standalone-db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - postgresql:/var/lib/postgresql
-      - postgresql-data:/var/lib/postgresql_data
+    - "${PWD}/data/:/var/lib/postgresql_data"
     networks:
-    - djangonet
-  web-django:
-    restart: always
-    privileged: true
-    command: bash -c "python3 manage.py runserver 0.0.0.0:8080"
-    build: ./src
-    container_name: standlone-django
-    volumes:
-      - ./src:/code
-    networks:
-    - djangonet
-    depends_on:
-    - db-django
-  nginx-django:
-    restart: always
-    container_name: standlone-nginx
-    build:
-      context: ./nginx/
-      dockerfile: Dockerfile
-    ports:
-    - "8080:80"
-    - "8443:443"
-    networks:
-    - djangonet
-    depends_on:
-    - web-django
+      - djangonet
 
-volumes:
-  postgresql:
-  postgresql-data:
+  nginx-django:
+    image: simonowens157/nginx:latest
+    container_name: standlone-nginx
+    restart: always
+    ports:
+      - "8080:80"
+      - "8443:443"
+    networks:
+      - djangonet
+
+  web-django:
+    image: simonowens157/django:v1.0
+    container_name: standlone-django
+    restart: always
+    command: bash -c "python ./manage.py migrate && python ./manage.py runserver 0.0.0.0:8080"
+    stdin_open: true
+    tty: true
+    volumes:
+      - "${PWD}/build/code/:/code"
+    networks:
+      - djangonet
+    depends_on:
+      - db-django
+      - nginx-django
     
 networks:
   djangonet:
     driver: bridge
-

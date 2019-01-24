@@ -7,6 +7,3 @@ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 50 | head -n 1 >> A_MainSite/sec
 # security settings
 cat "CSRF_COOKIE_SECURE = True" >> A_MainSite/settings.py
 cat "SESSION_COOKIE_SECURE = True" >> A_MainSite/settings.py
-
-
-# Deploy hello world page for right now to get started

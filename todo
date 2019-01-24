@@ -1,0 +1,11 @@
+create new app
+hello world, load static
+get login page done
+get student interface done
+get admin interface done
+
+
+get home deploy to work
+redo jenkins pipeline zap scan > report
+redo jenkins anchore engine scan > report
+redo jenkins sonarqube scan > reoprt

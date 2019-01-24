@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+  db_django:
+    image: simonowens157/postgresql:v1.0
+    restart: always
+    container_name: django_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - "${PWD}"/data:/var/lib/postgresql_data
+    networks:
+      - djangonet
+
+  nginx:
+    image: simonowens157/nginx:latest
+    container_name: nginx_server
+    restart: always
+    environment:
+      - VIRTUAL_HOST=ctfapp.owens-netsec.com
+      - LETSENCRYPT_HOST=ctfapp.owens-netsec.com
+      - LETSENCRYPT_EMAIL=simonowens157@gmail.com
+      - VIRTUAL_PORT=80
+    networks:
+    - djangonet
+  
+  web:
+    image: simonowens157/django:v1.0
+    container_name: django_server
+    restart: always
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    volumes:
+      - "${PWD}"/code/:/code
+    networks:
+      - djangonet
+    depends_on:
+      - db_django
+      - nginx
+    
+networks:
+  default:
+    external:
+      name: webproxy

@@ -1,2 +1,6 @@
+build/code/A_MainSite/settings.py
+
 data/*
-!data/README
+.vscode/*
+.idea/*
+.sonarlint/*
