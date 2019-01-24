@@ -23,7 +23,7 @@ This system can be run on both Centos7(ubuntu coming soon) and Windows because o
 You need to run everything as administrator.  There are security implications to running the docker daemon as a user because that allows for easier command and control. 
 </br>
 1. run "git clone https://github.com/so87/Security-Lab-Manager.git"
-2. run "build-windows.bat" or "build-linux.sh" depending on whether you are linux or windows
+2. run "install-windows.bat" or "install-linux.sh" depending on whether you are linux or windows
 3. if you need to stop or stop run "start-stop-windows.bat" or "start-stop-linux.sh" and that's it!
 
 ## Architecture
