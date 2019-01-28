@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block header %}
+<style>
+.form-container {
+    position: absolute;
+    top: 17.5%;
+    left: 3%;
+    width: 94%;
+    height: 65%;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: grey;
+    text-align: center;
+}
+</style>
+Manage Classes and Exercises
+{% endblock %}
+
+
+
+{% block body %}
+<div class="form-login">
+    <form class="form-container" method="POST">
+    {% csrf_token %}
+    
+    </form>
+</div>
+{% endblock %}

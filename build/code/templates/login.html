@@ -1,0 +1,58 @@
+{% extends "base_generic.html" %}
+
+{% block header %}
+<style>
+.form-container {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  padding: 10px;
+  background-color: whitesmoke;
+  border-radius: 30px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: grey;
+  text-align: center;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 90%;
+  margin-bottom:15px;
+  opacity: 0.8;
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+}
+
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+Security Lab Manager
+{% endblock %}
+
+
+{% block body %}
+
+<div class="form-login">
+    <form class="form-container" method="POST">
+      {% csrf_token %}
+      <h1>Welcome</h1>
+      {{ form.username }}
+      {{ form.password }}
+  
+      <button type="submit" class="btn">Login</button>
+    </form>
+</div>
+
+{% endblock %}

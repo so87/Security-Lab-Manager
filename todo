@@ -1,8 +1,13 @@
-hello world, load static
-get login page done
-submit hours
+get login done
 get student interface done
 get admin interface done
+create student model
+create instructor model
+create class model
+create exercise model
+display all of these things on the page properly
+create settings model
+create the admin settings page
 
 
 get home deploy to work

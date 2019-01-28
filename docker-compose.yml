@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-    - "${PWD}/data/:/var/lib/postgresql_data"
+    - ${PWD}/data/:/var/lib/postgresql_data
     networks:
       - djangonet
 
@@ -31,7 +31,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - "${PWD}/build/code/:/code"
+      - ${PWD}/build/code/:/code
     networks:
       - djangonet
     depends_on:
