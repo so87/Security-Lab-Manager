@@ -2,7 +2,26 @@
 
 {% block header %}
 <style>
-.form-container {
+.addUser {
+    color: white;
+    width: 10%;
+    height: 35%;
+    background-color: grey;
+    margin: 1px;
+    padding: 2px;;
+    opacity: .7;
+    right: .5%;
+    top: 0;
+    position: absolute;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.logout {
+    left: .5%;
+    top: 35%;
+}
+
+.form-background {
     position: absolute;
     top: 17.5%;
     left: 3%;
@@ -15,18 +34,22 @@
     border-style: solid;
     border-color: grey;
     text-align: center;
+    overflow-y: auto;
 }
 </style>
 Manage Settings
+<a href="/login/instructor" ><button type="submit" class="addUser logout">Go Back</button></a>
 {% endblock %}
 
 
 
 {% block body %}
-<div class="form-login">
-    <form class="form-container" method="POST">
-    {% csrf_token %}
-    
-    </form>
+<div class="form-background">
+    {% for setting in settings %}
+    <p> Instance Name: {{ setting.name }} </p> 
+    <p> Max Ram: {{ setting.ram }} </p>
+    <p> Max CPU Cores: {{ setting.cores }} </p>
+    <p> Max Ngninx Instances: {{ setting.instances }} </p>
+    {% endfor %}
 </div>
 {% endblock %}

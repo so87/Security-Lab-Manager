@@ -7,7 +7,7 @@
   top: 25%;
   left: 25%;
   width: 50%;
-  height: 50%;
+  height: 40%;
   padding: 10px;
   background-color: whitesmoke;
   border-radius: 30px;
@@ -32,10 +32,23 @@
   left: 5%;
 }
 
-
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
+}
+/* Full-width input fields */
+.form-container input{
+  width: 92.5%;
+  padding: 15px;
+  margin: 1.5% 0 0 0;
+  border: none;
+  background: #ddd;
+  
+}
+/* When the inputs get focus, do something */
+.form-container input:focus{
+  background-color: #ddd;
+  outline: none;
 }
 </style>
 Security Lab Manager
@@ -48,7 +61,7 @@ Security Lab Manager
     <form class="form-container" method="POST">
       {% csrf_token %}
       <h1>Welcome</h1>
-      {{ form.username }}
+      {{ form.email }}
       {{ form.password }}
   
       <button type="submit" class="btn">Login</button>

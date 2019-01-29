@@ -1,16 +1,27 @@
-get login done
-get student interface done
-get admin interface done
-create student model
-create instructor model
-create class model
-create exercise model
-display all of these things on the page properly
-create settings model
-create the admin settings page
+figure out how to resolve the circular import loop. it has to do something with with the many field class, redeclaring Users or exercises
 
-
-get home deploy to work
 redo jenkins pipeline zap scan > report
 redo jenkins anchore engine scan > report
 redo jenkins sonarqube scan > reoprt
+get home deploy to work
+
+
+allow users to authenticate with django framework
+settings page complete
+view/add/remove class
+view/add/remove exercise
+view/add/remove student
+add student via cvs
+create xss exercise
+allow run virtual machine
+status of exercises
+email grades
+port allocator
+sql injection exercise
+cross site scripting exercise
+buffer overflow exercise
+format string exercise
+hard coded password exercise
+
+test for vulns and flaws
+further automated tests, javascript for niceness, nginx static delivery properly

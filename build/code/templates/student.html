@@ -2,7 +2,42 @@
 
 {% block header %}
 <style>
-.form-container {
+::-webkit-scrollbar {
+    width: 11px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px lightgrey; 
+    border-radius: 25px;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: lightgrey; 
+    border-radius: 15px;
+}
+
+.addUser {
+    color: white;
+    width: 10%;
+    height: 35%;
+    background-color: grey;
+    margin: 1px;
+    padding: 2px;;
+    opacity: .7;
+    right: .5%;
+    top: 0;
+    position: absolute;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.logout {
+    left: .5%;
+    top: 35%;
+}
+
+.form-background {
     position: absolute;
     top: 17.5%;
     left: 3%;
@@ -15,20 +50,73 @@
     border-style: solid;
     border-color: grey;
     text-align: center;
+    overflow-y: auto;
+}
+
+.class {
+    width: 46%;
+    margin: 2%;
+    float: left;
+}
+.exercises {
+    width: 100%;
+    background-color: black;
+    overflow-y: auto;
+    height: 270px;
+    color: white;
+    border-radius: 30px;
+}
+.exercise {
+    float: left;
+    width: 100%;
+    margin: 1% 0;
+    padding: 2%;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 30px;
+}
+.btn {
+    color: white;
+    width: 19%;
+    height: 40px;
+    background-color: grey;
+    opacity: .7;
+    margin: auto;
+    padding: auto;
 }
 </style>
 Student Exercises
+<div>
+    <a href="/login" ><button type="submit" class="addUser logout">Logout</button></a>
+</div>
 {% endblock %}
 
 
 
 {% block body %}
 
-<div class="form-login">
-    <form class="form-container" method="POST">
-      {% csrf_token %}
+<div class="form-background">
 
-    </form>
+    {% for class in classes %}
+    <div class="class">
+        <h2>{{ class.name }}</h2>
+        <p>{{ class.description }}</p>
+        <div class="exercises">
+            {% for exercise in class.exercises.all %}
+                <div class="exercise">
+                    <h3>{{exercise.name}}</h3>
+                    <button type="submit" class="btn">Start</button>
+                    <button type="submit" class="btn">Stop</button>
+                    <button type="submit" class="btn">Reset</button>
+                    <input class="btn" value="Answer: ">
+                    <label class="btn">Not Submitted</label>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
 </div>
 
 {% endblock %}
