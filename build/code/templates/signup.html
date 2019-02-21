@@ -1,0 +1,79 @@
+{% extends "base_generic.html" %}
+
+{% block header %}
+<style>
+.form-background {
+    margin: 5%;
+    width: 90%;
+    height: 960px;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: grey;
+    text-align: center;
+}
+.help {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.addUser {
+    color: white;
+    width: 10%;
+    height: 35%;
+    background-color: grey;
+    margin: 1px;
+    padding: 2px;
+    opacity: .7;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.back {
+    position: abosolute;
+    left: .75%;
+    top: 35%;
+    height: 30px;
+    float: left;
+    text-align: center;
+}
+.back a {
+    text-decoration: none;
+    color: white;
+}
+</style>
+
+<div class="addUser back">
+    <a href="{% url 'login' %}">Back</a>
+</div>
+Sign Up
+{% endblock %}
+
+
+{% block body %}
+<div class="form-background">
+    <h2>Sign up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <h4>{{ field.label_tag }}</h4>
+            {{ field }}
+            <ul class='help'>
+                {% if field.help_text %}
+                <li style="color: grey">{{ field.help_text | striptags }}</li>
+                {% endif %}
+            </ul>
+            <ul class='help'>
+                {% for error in field.errors %}
+                <li style="color: red">{{ error}}</li>
+                {% endfor %}
+            </ul>
+            </br>
+        {% endfor %}
+    <button type="submit">Sign up</button>
+    </form>
+</div>
+{% endblock %}

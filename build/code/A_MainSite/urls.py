@@ -20,11 +20,13 @@ from django.views.generic.base import View
 from django.views.generic.base import RedirectView
 from django.urls import include
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', include('slmApp.urls')),
-    path('', RedirectView.as_view(url='/login/', permanent=True))
+    path('account/', include('slmApp.urls')),
+    path('', RedirectView.as_view(url='login/', permanent=True)),
+    url(r'^.*$', RedirectView.as_view(url='/account/login/', permanent=False), name='index')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

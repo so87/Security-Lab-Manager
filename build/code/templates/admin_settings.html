@@ -37,13 +37,20 @@
     overflow-y: auto;
 }
 </style>
+
+
+{% if user.is_authenticated %}
 Manage Settings
 <a href="/login/instructor" ><button type="submit" class="addUser logout">Go Back</button></a>
+{% else %}
+  <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
+{% endif %}
 {% endblock %}
 
 
 
 {% block body %}
+{% if user.is_authenticated %}
 <div class="form-background">
     {% for setting in settings %}
     <p> Instance Name: {{ setting.name }} </p> 
@@ -52,4 +59,5 @@ Manage Settings
     <p> Max Ngninx Instances: {{ setting.instances }} </p>
     {% endfor %}
 </div>
+{% endif %}
 {% endblock %}

@@ -7,15 +7,14 @@
 body {
     margin: 0;
     padding: 0;
+    {% load static %}
+    background-image: url({% static 'grid-background.webp' %});
 }
 
 .header {
     width: 100%;
     height: 100px;
     background-color: #09395D;
-    position: absolute;
-    top: 0px;
-    left: 0px;
     opacity: .5;
     border-style: solid; 
     border-radius: 0 0 20px 20px;
@@ -30,18 +29,12 @@ body {
     padding: 20px 0;
 }
 
-.background{
-    width: 100%;
-    height: 760px;
-}
 
 .footer {
   width: 100%;
   height: 100px;
+  clear: both;
   background-color: #09395D;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
   opacity: .2;
   border-style: solid; 
   border-radius: 20px 20px 0 0;
@@ -71,22 +64,20 @@ body {
   <link rel="stylesheet" type="text/css" href="{% static 'base_generic.css' %}">
 </head>
 <body>
-  
-  {% load static %}
-  <img src="{% static 'grid-background.webp' %}" class="background">
-  <div class="header">
-    <h1> {% block header %} {% endblock %}</h1>
-  </div>
 
-  {% block body %}
-  {% endblock %}
+<div class="header">
+  <h1> {% block header %} {% endblock %}</h1>
+</div>
 
-  <div class="footer">
-    <p> Instructor: </p>
-    <p> Instructor Email: </p>
-    <p> Learn more about Security Lab Manager on <a href="https://github.com/so87/Security-Lab-Manager">Github</a></p>
-    <p> <a href="https://github.com/so87/Security-Lab-Manager/blob/dev/documentation/LICENSE">License</a></p>
-  </div>
+{% block body %}
+{% endblock %}
+
+<div class="footer">
+  <p> Instructor: </p>
+  <p> Instructor Email: </p>
+  <p> Learn more about Security Lab Manager on <a href="https://github.com/so87/Security-Lab-Manager">Github</a></p>
+  <p> <a href="https://github.com/so87/Security-Lab-Manager/blob/dev/documentation/LICENSE">License</a></p>
+</div>
 
 </body>
 </html>

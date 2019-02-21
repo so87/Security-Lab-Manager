@@ -3,11 +3,8 @@
 {% block header %}
 <style>
 .form-container {
-  position: absolute;
-  top: 25%;
-  left: 25%;
+  margin: 5% 25%;
   width: 50%;
-  height: 40%;
   padding: 10px;
   background-color: whitesmoke;
   border-radius: 30px;
@@ -17,19 +14,16 @@
   text-align: center;
 }
 
-/* Set a style for the submit/login button */
+/* Set a style for the submit/login buttons */
 .form-container .btn {
   background-color: #4CAF50;
   color: white;
-  padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 90%;
-  margin-bottom:15px;
+  width: 93%;
+  margin: 10px 0;
+  padding: 16px 20px;
   opacity: 0.8;
-  position: absolute;
-  bottom: 0;
-  left: 5%;
 }
 
 /* Add some hover effects to buttons */
@@ -37,18 +31,22 @@
   opacity: 1;
 }
 /* Full-width input fields */
-.form-container input{
+.form-container form input{
   width: 92.5%;
   padding: 15px;
-  margin: 1.5% 0 0 0;
+  margin: 2.5% 0 2.5% 0;
   border: none;
   background: #ddd;
-  
 }
 /* When the inputs get focus, do something */
-.form-container input:focus{
+.form-container form input:focus{
   background-color: #ddd;
   outline: none;
+}
+
+.titles {
+  text-align: left;
+  margin: 5% 0 0 3.5%;
 }
 </style>
 Security Lab Manager
@@ -57,15 +55,17 @@ Security Lab Manager
 
 {% block body %}
 
-<div class="form-login">
-    <form class="form-container" method="POST">
-      {% csrf_token %}
-      <h1>Welcome</h1>
-      {{ form.email }}
-      {{ form.password }}
-  
-      <button type="submit" class="btn">Login</button>
-    </form>
+<div class="form-container">
+  <form method="POST">
+    {% csrf_token %}
+    <h1>Welcome</h1>
+    <h5 class="titles">Username: </h5>
+    {{ form.username }}
+    <h5 class="titles">Password: </h5>
+    {{ form.password }}
+    <button type="submit" class="btn">Login</button>
+  </form>
+  <a href="/account/signup"><button class="btn">Sign Up</button></a>
 </div>
 
 {% endblock %}

@@ -1,17 +1,20 @@
-figure out how to resolve the circular import loop. it has to do something with with the many field class, redeclaring Users or exercises
-
-redo jenkins pipeline zap scan > report
-redo jenkins anchore engine scan > report
-redo jenkins sonarqube scan > reoprt
-get home deploy to work
 
 
 allow users to authenticate with django framework
-settings page complete
+    redirect admin and users for login
+        2. is_superuser doesn't seem to work?
+    signup admin page
+    get testing to work on this
+    make sure users can only see their classes
+    make sure admins can only see their classes
+    
+    password reset
+    allow only users and admins to view their stuff
+view/add/remove student
 view/add/remove class
 view/add/remove exercise
-view/add/remove student
 add student via cvs
+
 create xss exercise
 allow run virtual machine
 status of exercises
@@ -22,6 +25,12 @@ cross site scripting exercise
 buffer overflow exercise
 format string exercise
 hard coded password exercise
+settings page complete
 
-test for vulns and flaws
+make install script to setup an admin users
+    prompt for username, password, email, first, last
+    start up exercises
+delete the test data url
+get home deploy to work
+test for vulns and flaws(anchore engine, sonarqube, owasp zap)
 further automated tests, javascript for niceness, nginx static delivery properly

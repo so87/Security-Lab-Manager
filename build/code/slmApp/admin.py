@@ -1,16 +1,27 @@
 from django.contrib import admin
-from slmApp.models import Users,Classes,Exercises,Settings
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
+
+from slmApp.models import Classes,Exercises,Settings,CustomUser
+from slmApp.forms import LoginForm
+
 
 # Register your models here.
-@admin.register(Users)
-class UserAdmin(admin.ModelAdmin):
-    pass
-@admin.register(Exercises)
+class CustomUserAdmin(admin.ModelAdmin):
+    add_form = LoginForm
+    form = LoginForm
+    model = CustomUser
+
 class ExercisesAdmin(admin.ModelAdmin):
-    pass
-@admin.register(Classes)
+    model = Exercises
+
 class ClassesAdmin(admin.ModelAdmin):
-    pass
-@admin.register(Settings)
+    model = Classes
+
 class SettingsAdmin(admin.ModelAdmin):
-    pass
+    model = Settings
+
+admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Exercises, ExercisesAdmin)
+admin.site.register(Classes, ClassesAdmin)
+admin.site.register(Settings, SettingsAdmin)
