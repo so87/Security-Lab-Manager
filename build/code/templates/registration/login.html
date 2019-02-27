@@ -65,7 +65,8 @@ Security Lab Manager
     {{ form.password }}
     <button type="submit" class="btn">Login</button>
   </form>
-  <a href="/account/signup"><button class="btn">Sign Up</button></a>
+  <a href="{% url 'signup' %}"><button class="btn">Sign Up</button></a>
+  <a href="{% url 'password_reset' %}"><button class="btn">Reset Password</button></a>
 </div>
 
 {% endblock %}

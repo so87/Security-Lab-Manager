@@ -8,13 +8,24 @@
     height: 35%;
     background-color: grey;
     margin: 1px;
-    padding: 2px;;
+    padding: 2px;
     opacity: .7;
-    right: .5%;
-    top: 0;
-    position: absolute;
     font-size: 20px;
     border-radius: 10px;
+}
+
+.back {
+    position: abosolute;
+    left: .75%;
+    top: 35%;
+    height: 50px;
+    float: left;
+    text-align: center;
+    padding: 10px;
+}
+.back a {
+    text-decoration: none;
+    color: white;
 }
 .logout {
     left: .5%;
@@ -22,11 +33,9 @@
 }
 
 .form-background {
-    position: absolute;
-    top: 17.5%;
-    left: 3%;
-    width: 94%;
-    height: 65%;
+    width: 90%;
+    height: 960px;
+    margin: 5%;
     padding: 10px;
     background-color: whitesmoke;
     border-radius: 30px;
@@ -39,9 +48,12 @@
 </style>
 
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.is_superuser%}
 Manage Settings
-<a href="/login/instructor" ><button type="submit" class="addUser logout">Go Back</button></a>
+<a href="{% url 'instructor' %}">
+    <div class="addUser back">Go Back</div>
+</a>
+
 {% else %}
   <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
 {% endif %}
@@ -50,7 +62,7 @@ Manage Settings
 
 
 {% block body %}
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.is_superuser %}
 <div class="form-background">
     {% for setting in settings %}
     <p> Instance Name: {{ setting.name }} </p> 

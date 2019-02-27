@@ -2,16 +2,17 @@ import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
+from django.shortcuts import get_object_or_404
 
-from slmApp.models import Classes, Exercises, Settings, CustomUser
-from slmApp.forms import LoginForm,SignUpForm
+from slmApp.models import Classes, Exercises, Submissions, Settings, CustomUser
+from slmApp.forms import LoginForm,SignUpForm,GetSubmissions,SubmitAnswer
 
-def LoginView(request): # is this view even being used??
+# The main login page
+def LoginView(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -20,14 +21,16 @@ def LoginView(request): # is this view even being used??
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            if user.is_superuser == True:
-                return redirect('instructor')
-            else:
-                return redirect('student')
-    else:
-        form = SignUpForm()
+    form = LoginForm()
     return render(request, 'login.html', {'form': form})
+# Decides if should go to instructor or student page
+def RedirectLogin(request):
+    if request.user.is_superuser == True:
+        return HttpResponseRedirect(reverse('instructor'))
+    else:
+        return HttpResponseRedirect(reverse('student'))
 
+# Signup forms for users and admins
 def SignupView(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -41,19 +44,115 @@ def SignupView(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+def SignupAdminView(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            user.is_superuser = True
+            user.save()
+            login(request, user)
+            return redirect('instructor')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
 
+# Correct Classes show up based on who you are
 def StudentView(request):
-    classes = Classes.objects.all()
-    return render(request, 'student.html', {'classes': classes})
-
+    classes = Classes.objects.filter(students=request.user)
+    form = SubmitAnswer()
+    return render(request, 'student.html', {'classes': classes, 'form': form})
 def InstructorView(request):
-    classes = Classes.objects.all()
+    classes = Classes.objects.filter(instructor=request.user)
     return render(request, 'admin.html', {'classes': classes})
+def SubmissionsView(request):
+    if request.method == 'POST':
+        form = GetSubmissions(request.POST)
+        if form.is_valid():
+            # Need to get all of the students in the class
+            class_object = Classes.objects.filter(pk=form.class_id)
+            student_list = classobj.students.all()
+            #need to translate student_list into list of student_pks
+
+            # Get the exercise with the specific ID/name
+            exercise_object = Exercises.objects.filter(pk=form.exercise_id)
+
+            # Get only submissions for that class, and exercise
+            submission = exercise_object.submissions.filter(pk__in=student_list.id)
+    else:
+        form = GetSubmissions()
+        submission = 0
+    return render(request, 'details_submissions.html', {'submission': submission})
+
 
 def InstructorSettingsView(request):
     settings = Settings.objects.all()
     return render(request, 'admin_settings.html', {'settings': settings})
 
+# submitting answers to the exercises
+def SubmitExerciseView(request):
+    if request.method == 'POST':
+        form = SubmitAnswer(request.POST)
+        if form.is_valid():
+            submit = form.save(commit=False)
+            submit.student = request.user
+            submit.save()
+    else:
+        form = SubmitAnswer()
+    return redirect('student')
+
+# Viewing Database Items
+def StudentsView(request):
+    students = CustomUser.objects.all()
+    return render(request, 'details_students.html', {'students': students})
+
+def ExercisesView(request):
+    exercises = Exercises.objects.all()
+    return render(request, 'details_exercises.html', {'exercises': exercises})
+
+def ClassesView(request):
+    classes = Classes.objects.all()
+    return render(request, 'details_classes.html', {'classes': classes})
+
+# Editing Database Items
+class ClassesCreate(CreateView):
+    model = Classes
+    fields = '__all__'
+class ClassesUpdate(UpdateView):
+    model = Classes
+    fields = '__all__'
+class ClassesDelete(DeleteView):
+    model = Classes
+    fields = '__all__'
+    success_url = reverse_lazy('instructor')
+
+class ExercisesCreate(CreateView):
+    model = Exercises
+    fields = '__all__'
+class ExercisesUpdate(UpdateView):
+    model = Exercises
+    fields = '__all__'
+class ExercisesDelete(DeleteView):
+    model = Exercises
+    fields = '__all__'
+    success_url = reverse_lazy('instructor')
+
+class CustomUserCreate(CreateView):
+    model = CustomUser
+    fields = '__all__'
+class CustomUserUpdate(UpdateView):
+    model = CustomUser
+    fields = '__all__'
+class CustomUserDelete(DeleteView):
+    model = CustomUser
+    fields = '__all__'
+    success_url = reverse_lazy('instructor')
+
+
+# Sample data to interact with
 def create_data():
     u4 = CustomUser.objects.create_user('johndoe', 'myemail@crazymail.com', 'johndoe')
     u4.first_name = 'John'

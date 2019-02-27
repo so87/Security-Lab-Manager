@@ -37,9 +37,40 @@
     position: abosolute;
     left: .75%;
     top: 35%;
-    height: 30px;
+    height: 50px;
     float: left;
     text-align: center;
+    padding: 10px;
+}
+.back a {
+    text-decoration: none;
+    color: white;
+}
+.settings {
+    position: abosolute;
+    right: .75%;
+    top: 35%;
+    height: 50px;
+    float: right;
+    text-align: center;
+    padding: 10px;
+}
+.settings a {
+    text-decoration: none;
+    color: white;
+}
+.signup {
+    position: abosolute;
+    left: .75%;
+    top: 35%;
+    height: 50px;
+    float: right;
+    text-align: center;
+    padding: .5%;
+}
+.signup a {
+    text-decoration: none;
+    color: white;
 }
 
 .form-background {
@@ -95,32 +126,53 @@
 </style>
 
 
-{% if user.is_authenticated %}
-{{ request.user.username }}'s Classes, Exercises, and Students
-<div class="addUser back">
-    <a href="{% url 'logout' %}">Logout</a>
-</div>
+{% if user.is_authenticated and user.is_superuser %}
+{{ request.user.username }}'s Classes
+<a href="{% url 'logout' %}">
+    <div class="addUser back">Logout</div>
+</a>
+<a href="{% url 'classes' %}">
+    <div class="addUser signup">Manage Classes</div>
+</a>
+<a href="{% url 'exercises' %}">
+    <div class="addUser signup">Manage Exercises</div>
+</a>
+<a href="{% url 'students' %}">
+    <div class="addUser signup">Manage Users</div>
+</a>
+<a href="{% url 'signupAdmin' %}">
+    <div class="addUser signup">Create Admin</div>
+</a>
+<a href="{% url 'settings' %}">
+    <div class="addUser signup">Site Settings</div>
+</a>
+
 {% else %}
   <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
 {% endif %}
 {% endblock %}
 
+
 {% block body %}
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.is_superuser %}
 <div class="form-background">
     {% for class in classes %}
     <div class="class">
         <div>
             <h2>{{ class.name }}</h2>
-            <button type="submit" class="btn edit">Edit Class</button>
-            <button type="submit" class="btn edit">View Gradebook</button>
+            <a href="{% url 'classes_update' class.pk %}"><button type="submit" class="btn edit">Edit Class</button></a>
+            <button type="submit" class="btn edit">Gradebook</button>
         </div>
         <div class="exercises">
             {% for exercise in class.exercises.all %}
                 <div class="exercise">
                     <h3>{{exercise.name}}</h3>
-                    <button type="submit" class="btn">View Submissions</button>
-                    <button type="submit" class="btn">Edit</button>
+                    <form method="POST" action="{% url 'submission_details' %}">
+                        {% csrf_token %}
+
+                        <button class="btn">Submissions </button>
+                    </form>
+                    <a href="{% url 'exercises_update' exercise.pk %}"><button type="submit" class="btn">Edit</button></a>
                     <button type="submit" class="btn">Email Grades</button>
                 </div>
             {% endfor %}

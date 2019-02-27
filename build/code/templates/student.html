@@ -89,14 +89,17 @@
     margin: auto;
     padding: auto;
 }
+.btn input {
+    width: 100%;
+}
 </style>
 
 
 {% if user.is_authenticated %}
 {{ request.user.username }}'s Exercises
-<div class="addUser back">
-    <a href="{% url 'logout' %}">Logout</a>
-</div>
+<a href="{% url 'logout' %}">
+    <div class="addUser back">Logout</div>
+</a>
 
 {% else %}
   <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
@@ -119,7 +122,10 @@
                     <button type="submit" class="btn">Start</button>
                     <button type="submit" class="btn">Stop</button>
                     <button type="submit" class="btn">Reset</button>
-                    <input class="btn" value="Answer: ">
+                    <form method="POST" action="{% url 'submit' %}" class="btn">
+                        {% csrf_token %}
+                        {{ form.submitted }}
+                    </form>
                     <label class="btn">Not Submitted</label>
                 </div>
             {% endfor %}

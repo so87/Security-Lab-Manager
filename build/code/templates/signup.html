@@ -2,17 +2,16 @@
 
 {% block header %}
 <style>
-.form-background {
-    margin: 5%;
-    width: 90%;
-    height: 960px;
-    padding: 10px;
-    background-color: whitesmoke;
-    border-radius: 30px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: grey;
-    text-align: center;
+.form-container {
+  margin: 5% 25%;
+  width: 50%;
+  padding: 10px;
+  background-color: whitesmoke;
+  border-radius: 30px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: grey;
+  text-align: center;
 }
 .help {
     list-style: none;
@@ -45,16 +44,23 @@
     color: white;
 }
 </style>
+{% if user.is_authenticated and user.is_superuser%}
+<a href="{% url 'instructor' %}">
+    <div class="addUser back">Back</div>
+</a>
 
-<div class="addUser back">
-    <a href="{% url 'login' %}">Back</a>
-</div>
+{% else %}
+<a href="{% url 'login' %}">
+    <div class="addUser back">Back</div>
+</a>
+{% endif %}
+
 Sign Up
 {% endblock %}
 
 
 {% block body %}
-<div class="form-background">
+<div class="form-container">
     <h2>Sign up</h2>
     <form method="post">
         {% csrf_token %}

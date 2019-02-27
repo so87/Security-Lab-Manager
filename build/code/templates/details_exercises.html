@@ -1,0 +1,92 @@
+{% extends "base_generic.html" %}
+{% block header %}
+<style>
+.form-background {
+    width: 90%;
+    height: 960px;
+    margin: 5%;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: grey;
+    text-align: left;
+    overflow-y: auto;
+}
+.addUser {
+    color: white;
+    width: 10%;
+    height: 35%;
+    background-color: grey;
+    margin: 1px;
+    padding: 2px;
+    opacity: .7;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.back {
+    position: abosolute;
+    left: .75%;
+    top: 35%;
+    height: 50px;
+    float: left;
+    text-align: center;
+    padding: 10px;
+}
+.class {
+    text-align: left;
+    margin: 50px 50px;
+    clear: both;
+}
+.class h2 {
+    font-size: 40px;
+    float: left;
+    width: 40%;
+    text-align: center;
+}
+.btn {
+    border-style: solid;
+    border-color: black;
+    border-width: 3%;
+    padding: 1%;
+    margin: 0 1%;
+    background-color: grey;
+    float: left;
+}
+.btn a {
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+}
+
+</style>
+{% if user.is_authenticated and user.is_superuser %}
+<a href="{% url 'instructor' %}">
+    <div class="addUser back">Back</div>
+</a>
+Exercises
+{% else %}
+  <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
+{% endif %}
+{% endblock %}
+
+
+{% block body %}
+{% if user.is_authenticated and user.is_superuser %}
+<div class="form-background">
+{% for exercise in exercises %}
+  <div class="class">
+    <h2>{{ exercise.name }}</h2>
+    <div class="btn">
+        <a href="{% url 'exercises_update' exercise.pk %}">Edit</a>
+    </div>
+    <div class="btn">
+        <a href="{% url 'exercises_delete' exercise.pk %}">Delete</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+{% endif %}
+{% endblock %}

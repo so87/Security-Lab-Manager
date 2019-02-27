@@ -1,32 +1,35 @@
 
+submissions view: for each student, list submission(table.)
+    make instructor view submissions for exercise
+        right now form being sent to submissions/ is not valid
+        not sure how to pass that page my class.students+exercise.id
+    test multiple users and multiple answers on multiple exercises
+gradebook view: for each exercise, list students submissions(table)
 
-allow users to authenticate with django framework
-    redirect admin and users for login
-        2. is_superuser doesn't seem to work?
-    signup admin page
-    get testing to work on this
-    make sure users can only see their classes
-    make sure admins can only see their classes
-    
-    password reset
-    allow only users and admins to view their stuff
-view/add/remove student
-view/add/remove class
-view/add/remove exercise
-add student via cvs
+get button to turn on docker container
+button stop
+button reset
+status of exercises
+change status of exercise to "already submitted" when done
 
 create xss exercise
-allow run virtual machine
-status of exercises
-email grades
+dynamically make hash value and copy it in upon creation
 port allocator
 sql injection exercise
 cross site scripting exercise
 buffer overflow exercise
 format string exercise
 hard coded password exercise
-settings page complete
+make sure all of these automatically load upon startup
 
+Grade submitted exercises(check for same answers and if they got it right)
+email grades button
+download to CSV
+
+create multiple choice question exercises
+create another field that logs each users attempt at an exercise
+
+settings page allow alterations complete
 make install script to setup an admin users
     prompt for username, password, email, first, last
     start up exercises

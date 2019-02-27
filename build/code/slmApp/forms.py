@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Permission
-from slmApp.models import Exercises,Classes,CustomUser
+from slmApp.models import Exercises,Classes,CustomUser,Submissions
 from django import forms
 from django.forms import ModelForm
     
@@ -19,7 +19,16 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
     class Meta:
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+class SubmitAnswer(forms.ModelForm):
+    submitted = forms.CharField(max_length=50)
+    class Meta:
+        model = Submissions
+        exclude = ['student']
+
+class GetSubmissions(forms.Form):
+    class_id = forms.IntegerField(help_text='The PK of the class you want')
+    exercise_id = forms.IntegerField(help_text='The PK of the exercise you want')
