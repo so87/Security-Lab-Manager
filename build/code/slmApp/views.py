@@ -7,9 +7,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from slmApp.models import Classes, Exercises, Submissions, Settings, CustomUser
-from slmApp.forms import LoginForm,SignUpForm,GetSubmissions,SubmitAnswer
+from slmApp.forms import LoginForm,SignUpForm,SubmitAnswer
+
+from slmApp.exercises import command
 
 # The main login page
 def LoginView(request):
@@ -61,38 +64,22 @@ def SignupAdminView(request):
     return render(request, 'signup.html', {'form': form})
 
 # Correct Classes show up based on who you are
+@login_required
 def StudentView(request):
     classes = Classes.objects.filter(students=request.user)
     form = SubmitAnswer()
     return render(request, 'student.html', {'classes': classes, 'form': form})
+@login_required
 def InstructorView(request):
     classes = Classes.objects.filter(instructor=request.user)
     return render(request, 'admin.html', {'classes': classes})
-def SubmissionsView(request):
-    if request.method == 'POST':
-        form = GetSubmissions(request.POST)
-        if form.is_valid():
-            # Need to get all of the students in the class
-            class_object = Classes.objects.filter(pk=form.class_id)
-            student_list = classobj.students.all()
-            #need to translate student_list into list of student_pks
-
-            # Get the exercise with the specific ID/name
-            exercise_object = Exercises.objects.filter(pk=form.exercise_id)
-
-            # Get only submissions for that class, and exercise
-            submission = exercise_object.submissions.filter(pk__in=student_list.id)
-    else:
-        form = GetSubmissions()
-        submission = 0
-    return render(request, 'details_submissions.html', {'submission': submission})
-
-
+@login_required
 def InstructorSettingsView(request):
     settings = Settings.objects.all()
     return render(request, 'admin_settings.html', {'settings': settings})
 
 # submitting answers to the exercises
+@login_required
 def SubmitExerciseView(request):
     if request.method == 'POST':
         form = SubmitAnswer(request.POST)
@@ -103,27 +90,56 @@ def SubmitExerciseView(request):
     else:
         form = SubmitAnswer()
     return redirect('student')
+@login_required
+def SubmissionsView(request, Cpk, Epk):
+    if request.method == 'POST':
+        # Need to get all of the students in the class
+        class_object = Classes.objects.get(pk=Cpk)
+        student_list = class_object.students.all()
+        student_pks = []
+        for student in student_list:
+            student_pks.append(student.id)
+        # Get the exercise with the specific ID/name
+        exercise_object = Exercises.objects.get(pk=Epk)
+        
+        attempt_list = Submissions.objects.filter(student=student_list).values()
+        #attempt_list = Exercises.get_submissions(exercise_object, student_pks)
+
+        # Get only submissions for that class's students for that exercise
+        attempts = []
+        for attempt in attempt_list:
+            if attempt.student.pk in student_pks:
+                attempts.append(attempt)
+        # can't find out how many objects im querying
+        #students = CustomUser.objects.filter(pk__in=student_pks)
+        #subs = Submissions.objects.filter(student=students)
+        count = attempt_list.count() #Exercises.objects.filter(pk=Epk).filter(attempted=subs).count()
+    return render(request, 'details_submissions.html', {'attempt_list': attempt_list, 'count': count})
 
 # Viewing Database Items
+@login_required
 def StudentsView(request):
     students = CustomUser.objects.all()
     return render(request, 'details_students.html', {'students': students})
-
+@login_required
 def ExercisesView(request):
     exercises = Exercises.objects.all()
     return render(request, 'details_exercises.html', {'exercises': exercises})
-
+@login_required
 def ClassesView(request):
     classes = Classes.objects.all()
     return render(request, 'details_classes.html', {'classes': classes})
 
 # Editing Database Items
+
 class ClassesCreate(CreateView):
     model = Classes
     fields = '__all__'
+
 class ClassesUpdate(UpdateView):
     model = Classes
     fields = '__all__'
+
 class ClassesDelete(DeleteView):
     model = Classes
     fields = '__all__'
@@ -132,9 +148,11 @@ class ClassesDelete(DeleteView):
 class ExercisesCreate(CreateView):
     model = Exercises
     fields = '__all__'
+
 class ExercisesUpdate(UpdateView):
     model = Exercises
     fields = '__all__'
+
 class ExercisesDelete(DeleteView):
     model = Exercises
     fields = '__all__'
@@ -143,14 +161,80 @@ class ExercisesDelete(DeleteView):
 class CustomUserCreate(CreateView):
     model = CustomUser
     fields = '__all__'
+
 class CustomUserUpdate(UpdateView):
     model = CustomUser
     fields = '__all__'
+
 class CustomUserDelete(DeleteView):
     model = CustomUser
     fields = '__all__'
     success_url = reverse_lazy('instructor')
+@login_required
+def StartExercise(request, StudentPK, ExercisePK):
+    # ensure the user has authorization to start that exercise
+    student = CustomUser.objects.get(pk=StudentPK)
+    # finds student and their exercise to run
+    exercise = Exercises.objects.get(pk=ExercisePK)
+    exercise_name = exercise.name
+    exercise_name = exercise_name.lower()
+    exercise_name = exercise_name.replace(" ", "")
+    student_name = student.username
 
+    # ensure the student isn't already running another container
+    if (student.exercises_running == 1):
+        return redirect('student')
+
+    # run the exercise
+    status = command.run_container(student_name, exercise_name)
+
+    # update containers running if it staretd successfully
+    if(status != 1):
+        student.exercises_running = 1
+        student.save()
+    print("Exercises open: "+str(student.exercises_running))
+    # give the user back their port so they know where to go
+    return redirect('student')
+@login_required
+def StopExercise(request, StudentPK, ExercisePK):
+    # ensure the user has authorization to start that exercise
+    student = CustomUser.objects.get(pk=StudentPK)
+    # finds student and their exercise to run
+    exercise = Exercises.objects.get(pk=ExercisePK)
+    exercise_name = exercise.name
+    exercise_name = exercise_name.lower()
+    exercise_name = exercise_name.replace(" ", "")
+    student_name = student.username
+
+    # run the exercise
+    status = command.stop_container(student_name, exercise_name)
+
+    # update containers running if it staretd successfully
+    if(status == 0):
+        student.exercises_running = 0
+        student.save()
+    print("Exercises open: "+str(student.exercises_running))
+    return redirect('student')
+@login_required
+def RestartExercise(request, StudentPK, ExercisePK):
+    # ensure the user has authorization to start that exercise
+    student = CustomUser.objects.get(pk=StudentPK)
+    # finds student and their exercise to run
+    exercise = Exercises.objects.get(pk=ExercisePK)
+    exercise_name = exercise.name
+    exercise_name = exercise_name.lower()
+    exercise_name = exercise_name.replace(" ", "")
+    student_name = student.username
+
+    # restart the exercise
+    status = command.restart_container(student_name, exercise_name)
+
+    # update containers running if it staretd successfully
+    if(status == 0):
+        student.exercises_running = 0
+        student.save()
+    print("Exercises open: "+str(student.exercises_running))
+    return redirect('student')
 
 # Sample data to interact with
 def create_data():

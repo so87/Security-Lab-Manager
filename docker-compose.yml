@@ -32,6 +32,7 @@ services:
     tty: true
     volumes:
       - ${PWD}/build/code/:/code
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - djangonet
     depends_on:

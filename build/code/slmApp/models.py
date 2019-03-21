@@ -16,13 +16,15 @@ class Settings(models.Model):
         return reverse('settings-detail', args=[str(self.id)])
 
 class CustomUser(AbstractUser):
-    # add additional fields in here
+    exercises_running = models.IntegerField(default=0)
     def __str__(self):
         return self.username
 
 class Submissions(models.Model):
-    student = models.ForeignKey('CustomUser',on_delete=models.PROTECT)
+    student = models.ForeignKey('CustomUser',on_delete=models.PROTECT, unique=True)
     submitted = models.CharField(max_length=50)
+    def filter_students(self, pk_list):
+        return self.student.filter(pk__in=pk_list)
     class Meta:
         ordering = ['student']
     def __str__(self):
@@ -35,7 +37,10 @@ class Exercises(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     answer = models.CharField(max_length=50)
-    attempted = models.ManyToManyField('Submissions', blank=True, related_name='submission')
+    attempted = models.ManyToManyField('Submissions', blank=True, related_name='attempted')
+
+    def get_submissions(self, pk_list):
+        return self.attempted.filter_students(self.attempted, pk_list)
 
     class Meta:
         ordering = ['name']
@@ -48,7 +53,7 @@ class Exercises(models.Model):
 class Classes(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
-    students = models.ManyToManyField('CustomUser', blank=True, related_name='user')
+    students = models.ManyToManyField('CustomUser', blank=True, related_name='students')
     instructor = models.ManyToManyField('CustomUser', blank=True, related_name='instructor')
     exercises = models.ManyToManyField('Exercises', blank=True, related_name='exercises')
     

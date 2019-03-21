@@ -1,0 +1,5 @@
+addons:
+  sonarcloud:
+    organization: "so87_Security-Lab-Manager" # the key of the org you chose at step #3
+script:
+  - sonar-scanner

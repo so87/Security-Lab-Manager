@@ -19,3 +19,5 @@ A
 build-windows.bat,5\0\50867e9ecb7197189c20c4b22b10b53bf9f715cc
 F
 src/A_MainSite/urls.py,d\3\d398b5d6f0e92c269bac14590a08e5348f51a2fc
+I
+build/code/slmApp/apps.py,b\f\bfd836132f7a99fc834f8eacb5299935edb56c3a

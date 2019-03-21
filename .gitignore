@@ -1,6 +1,11 @@
 build/code/A_MainSite/settings.py
+build/code/slmApp/migrations/*
+build/code/slmApp/__pycache__/*
+build/code/A_MainSite/__pycache__/*
 
 data/*
+
 .vscode/*
 .idea/*
 .sonarlint/*
+.scannerwork/*

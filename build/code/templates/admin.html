@@ -167,10 +167,9 @@
             {% for exercise in class.exercises.all %}
                 <div class="exercise">
                     <h3>{{exercise.name}}</h3>
-                    <form method="POST" action="{% url 'submission_details' %}">
+                    <form method="POST" action="{% url 'submission_details' class.pk exercise.pk %}">
                         {% csrf_token %}
-
-                        <button class="btn">Submissions </button>
+                        <button class="btn">Submissions</button>
                     </form>
                     <a href="{% url 'exercises_update' exercise.pk %}"><button type="submit" class="btn">Edit</button></a>
                     <button type="submit" class="btn">Email Grades</button>

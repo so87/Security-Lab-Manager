@@ -28,7 +28,3 @@ class SubmitAnswer(forms.ModelForm):
     class Meta:
         model = Submissions
         exclude = ['student']
-
-class GetSubmissions(forms.Form):
-    class_id = forms.IntegerField(help_text='The PK of the class you want')
-    exercise_id = forms.IntegerField(help_text='The PK of the exercise you want')

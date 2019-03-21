@@ -80,6 +80,23 @@
     border-style: solid;
     border-radius: 30px;
 }
+.exercise h3 {
+    float: left;
+    width: 50%;
+    margin-left: 10%;
+}
+.status {
+    float: right;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    width: 40%;
+    margin-top: 5px;
+}
+.exercisebuttons{
+    clear: both;
+    width: 100%;
+}
 .btn {
     color: white;
     width: 19%;
@@ -119,14 +136,28 @@
             {% for exercise in class.exercises.all %}
                 <div class="exercise">
                     <h3>{{exercise.name}}</h3>
-                    <button type="submit" class="btn">Start</button>
-                    <button type="submit" class="btn">Stop</button>
-                    <button type="submit" class="btn">Reset</button>
-                    <form method="POST" action="{% url 'submit' %}" class="btn">
-                        {% csrf_token %}
-                        {{ form.submitted }}
-                    </form>
-                    <label class="btn">Not Submitted</label>
+                    <div class="status">
+                        {{status}}
+                    </div>
+                    <div class="exercisebuttons">
+                        <form class="btn" method="POST" action="{% url 'start_exercise' user.pk exercise.pk%}" class="btn">
+                            {% csrf_token %}
+                            <button type="submit">Start</button>
+                        </form>
+                        <form class="btn" method="POST" action="{% url 'restart_exercise' user.pk exercise.pk%}" class="btn">
+                            {% csrf_token %}
+                            <button type="submit">Reset</button>
+                        </form>
+                        <form class="btn" method="POST" action="{% url 'stop_exercise' user.pk exercise.pk%}" class="btn">
+                            {% csrf_token %}
+                            <button type="submit">Stop</button>
+                        </form>
+                        <form method="POST" action="{% url 'submit' %}" class="btn">
+                            {% csrf_token %}
+                            {{ form.submitted }}
+                        </form>
+                        <label class="btn">Not Submitted</label>
+                    </div>
                 </div>
             {% endfor %}
         </div>

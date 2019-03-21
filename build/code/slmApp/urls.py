@@ -34,7 +34,12 @@ urlpatterns = [
     path('instructor/students/create/', views.CustomUserCreate.as_view(), name='customUser_create'),
     
     path('student/submit', views.SubmitExerciseView, name='submit'),
-    path('instructor/submissions/', views.SubmissionsView, name='submission_details'),
+    path('instructor/submissions/<int:Cpk>/<int:Epk>', views.SubmissionsView, name='submission_details'),
+
+    # Start, Stop, and restart exercises
+    path('student/<int:StudentPK>/<int:ExercisePK>/start/', views.StartExercise, name='start_exercise'),
+    path('student/<int:StudentPK>/<int:ExercisePK>/restart/', views.RestartExercise, name='restart_exercise'),
+    path('student/<int:StudentPK>/<int:ExercisePK>/stop/', views.StopExercise, name='stop_exercise'),
 
     # Views for settings
     path('instructor/settings/', views.InstructorSettingsView, name='settings'),
