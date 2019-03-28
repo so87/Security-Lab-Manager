@@ -10,6 +10,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/so87/Security-Lab-Manager.svg)](https://github.com/so87/Security-Lab-Manager/issues)
 
 [![GitHub license](https://img.shields.io/github/license/so87/Security-Lab-Manager.svg)](https://github.com/so87/Security-Lab-Manager)
+[Sonarqube Results](https://sonarcloud.io/dashboard?id=so87_Security-Lab-Manager)
 
 ## Description
 This is my senior project at the University of Evansville.  This application is meant to be easily run by educators and enthusiasts to learn security.  Users can launch security exercises.  If they complete the exercise, they can submit their unique value to the application.  Administrators can login to see if users completed their exercises.
@@ -47,4 +48,3 @@ Below is my high level development and deployment process.  I have a CI build an
 <p align="center">
   <img width="1000" height="500" src="https://github.com/so87/Security-Lab-Manager/blob/dev/documentation/dev-deploy-process.PNG">
 </p>
-

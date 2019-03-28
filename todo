@@ -13,6 +13,7 @@ gradebook view: for each exercise, list students submissions(table)
 
 
 get button to turn on docker container
+    customer user which exercise running
     status button(port, default red, green if on, and massages)
     link to exercise
     status of exercises(flashing yellow jquery)(already running, already stopped)
@@ -31,6 +32,7 @@ hard coded password exercise
 make sure all of these automatically load upon startup
 
 Grade submitted exercises(check for same answers and if they got it right)
+impliment logging
 email grades button
 download to CSV
 
