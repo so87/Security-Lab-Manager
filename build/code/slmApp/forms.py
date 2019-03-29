@@ -23,8 +23,5 @@ class SignUpForm(UserCreationForm):
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
-class SubmitAnswer(forms.ModelForm):
+class SubmitAnswer(forms.Form):
     submitted = forms.CharField(max_length=50)
-    class Meta:
-        model = Submissions
-        exclude = ['student']

@@ -65,7 +65,7 @@
 <a href="{% url 'instructor' %}">
     <div class="addUser back">Back</div>
 </a>
-Submissions
+{{classes.name}}'s Gradebook
 {% else %}
   <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
 {% endif %}
@@ -75,8 +75,8 @@ Submissions
 {% block body %}
 {% if user.is_authenticated and user.is_superuser %}
 <div class="form-background">
-    {% for submission in submissions %}
-        <h3>Student: {{ submission.student }} | Answered: {{ submission.submitted }} </h3>
+    {% for exercise in exercises %}
+        
     {% endfor %}
 </div>
 {% endif %}

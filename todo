@@ -4,10 +4,11 @@ bugs
 3. can't create exercises or classes URL
 4. shouldn't bind docker socket - this also might cause win/linux issues
 5. if on windows, create env var COMPOSE_CONVERT_WINDOWS_PATHS=1
+
 submissions view: for each student, list submission(table.)
     make instructor view submissions for exercise
-        display submissions
-        right now form being sent to submissions/ is not valid
+        can't submit an exercise(user or in admin)
+        pretty sure filter to get submissions is wrong
     test multiple users and multiple answers on multiple exercises
 gradebook view: for each exercise, list students submissions(table)
 

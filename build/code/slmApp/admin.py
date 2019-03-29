@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
 
-from slmApp.models import Classes,Exercises,Settings,CustomUser
+from slmApp.models import Classes,Exercises,Settings,CustomUser,Submissions
 from slmApp.forms import LoginForm
 
 
@@ -18,10 +18,14 @@ class ExercisesAdmin(admin.ModelAdmin):
 class ClassesAdmin(admin.ModelAdmin):
     model = Classes
 
+class SubmissionsAdmin(admin.ModelAdmin):
+    model = Submissions
+
 class SettingsAdmin(admin.ModelAdmin):
     model = Settings
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Exercises, ExercisesAdmin)
 admin.site.register(Classes, ClassesAdmin)
+admin.site.register(Submissions, SubmissionsAdmin)
 admin.site.register(Settings, SettingsAdmin)

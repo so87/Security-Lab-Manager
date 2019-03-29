@@ -80,41 +80,45 @@ def InstructorSettingsView(request):
 
 # submitting answers to the exercises
 @login_required
-def SubmitExerciseView(request):
+def SubmitExerciseView(request, Cpk, Epk):
     if request.method == 'POST':
         form = SubmitAnswer(request.POST)
         if form.is_valid():
-            submit = form.save(commit=False)
-            submit.student = request.user
-            submit.save()
+            user_submission = form.cleaned_data.get("submitted")
+            exercise = Exercises.objects.get(pk=Epk)
+            class_inst = Classes.objects.get(pk=Cpk)
+            submission, created = Submissions.objects.get_or_create(student=request.user,exercises=exercise,classes=class_inst)
+            submission.submitted = user_submission
+            submission.save()
     else:
         form = SubmitAnswer()
     return redirect('student')
+
 @login_required
 def SubmissionsView(request, Cpk, Epk):
     if request.method == 'POST':
-        # Need to get all of the students in the class
-        class_object = Classes.objects.get(pk=Cpk)
-        student_list = class_object.students.all()
-        student_pks = []
-        for student in student_list:
-            student_pks.append(student.id)
-        # Get the exercise with the specific ID/name
-        exercise_object = Exercises.objects.get(pk=Epk)
-        
-        attempt_list = Submissions.objects.filter(student=student_list).values()
-        #attempt_list = Exercises.get_submissions(exercise_object, student_pks)
+        submissions = Submissions.objects.filter(classes=Cpk).filter(exercises=Epk)
+        return render(request, 'details_submissions.html', {'submissions': submissions})
 
-        # Get only submissions for that class's students for that exercise
-        attempts = []
-        for attempt in attempt_list:
-            if attempt.student.pk in student_pks:
-                attempts.append(attempt)
-        # can't find out how many objects im querying
-        #students = CustomUser.objects.filter(pk__in=student_pks)
-        #subs = Submissions.objects.filter(student=students)
-        count = attempt_list.count() #Exercises.objects.filter(pk=Epk).filter(attempted=subs).count()
-    return render(request, 'details_submissions.html', {'attempt_list': attempt_list, 'count': count})
+@login_required
+def GradebookView(request, Cpk):
+    classes = Classes.objects.get(pk=Cpk)
+    students = classes.students.all()
+    exercises = classes.exercises.all()
+    
+    # exercise is the row
+    for exercise in exercises:
+        # students are the columns
+        for student in students:
+            # check if student submitted an answer for this exercise
+            grades += Submissions.objects.filter(classes=Cpk).filter(exercises=exercise.id)
+
+            # decide if user got the correct answer or not (zero if not submitted)
+    
+    print(grades)
+    print(students)
+    print(exercises)
+    return render(request, 'details_gradebook.html', {'classes': classes,})
 
 # Viewing Database Items
 @login_required

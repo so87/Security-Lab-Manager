@@ -33,8 +33,9 @@ urlpatterns = [
     path('instructor/students/<int:pk>/delete/', views.CustomUserDelete.as_view(), name='customUser_delete'),
     path('instructor/students/create/', views.CustomUserCreate.as_view(), name='customUser_create'),
     
-    path('student/submit', views.SubmitExerciseView, name='submit'),
+    path('student/submit/<int:Cpk>/<int:Epk>', views.SubmitExerciseView, name='submit'),
     path('instructor/submissions/<int:Cpk>/<int:Epk>', views.SubmissionsView, name='submission_details'),
+    path('instructor/gradebook/<int:Cpk>', views.GradebookView, name='gradebook'),
 
     # Start, Stop, and restart exercises
     path('student/<int:StudentPK>/<int:ExercisePK>/start/', views.StartExercise, name='start_exercise'),

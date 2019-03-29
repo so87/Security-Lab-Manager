@@ -152,7 +152,7 @@
                             {% csrf_token %}
                             <button type="submit">Stop</button>
                         </form>
-                        <form method="POST" action="{% url 'submit' %}" class="btn">
+                        <form method="POST" action="{% url 'submit' class.pk exercise.pk %}" class="btn">
                             {% csrf_token %}
                             {{ form.submitted }}
                         </form>
