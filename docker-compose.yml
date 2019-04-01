@@ -27,7 +27,7 @@ services:
     image: simonowens157/django:v1.0
     container_name: standlone-django
     restart: always
-    command: bash -c "python /code/manage.py makemigrations slmApp && python /code/manage.py migrate && python /code/manage.py runserver 0.0.0.0:8080"
+    command: ${RUN_ENV}
     stdin_open: true
     tty: true
     volumes:

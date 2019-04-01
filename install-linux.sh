@@ -17,5 +17,7 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-port=8443/tcp --permanent
 firewall-cmd --reload
 
-echo Starting docker containers
-docker-compose up -d
+echo Creating Admin User... Enter carefully as you will only be prompted once
+./create_admin.sh
+
+echo Use the "start-stop-linux|windows" scripts to run the application

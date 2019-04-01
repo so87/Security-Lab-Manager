@@ -104,14 +104,38 @@
 .btn {
     color: white;
     width: 19%;
-    height: 40px;
-    background-color: grey;
-    opacity: .7;
+    height: 60px;
+    background-color: #333333;
     margin: auto;
     padding: auto;
+    font-size: 20px;
+}
+.btn button {
+    color: white;
+    background-color: #333333;
+    border-color: #333333;
+    width: 100%;
 }
 .btn input {
-    width: 100%;
+    width: 90%;
+    height: 15px;
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
+}
+#submitted{
+    font-size: 16px; 
+    font-size: 1vw;
+    padding: 0;
+}
+#submit_answer {
+    padding: 0;
+}
+#answer {
+    float: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 </style>
 
@@ -171,9 +195,10 @@ $("document").ready(function(){
                             {% csrf_token %}
                             <button type="submit">Stop</button>
                         </form>
-                        <form method="POST" action="{% url 'submit' class.pk exercise.pk %}" class="btn">
+                        <form id="submit_answer" method="POST" action="{% url 'submit' class.pk exercise.pk %}" class="btn">
+                            <button type="submit">Submit</button>
                             {% csrf_token %}
-                            {{ form.submitted }}
+                            <div id="answer">{{ form.submitted }}</div>
                         </form>
 
                         {% if submitted.pk == exercise.pk %}

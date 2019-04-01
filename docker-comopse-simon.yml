@@ -29,9 +29,10 @@ services:
     image: simonowens157/django:v1.0
     container_name: django_server
     restart: always
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    command: bash -c "sh production_deploy.sh && sh start-django.sh"
     volumes:
       - "${PWD}"/code/:/code
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - djangonet
     depends_on:

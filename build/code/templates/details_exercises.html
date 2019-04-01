@@ -59,6 +59,13 @@
     text-decoration: none;
     font-size: 28px;
 }
+#create {
+    width: 100%;
+    text-align: center;
+}
+#create h2 a{
+    color: black;
+}
 
 </style>
 {% if user.is_authenticated and user.is_superuser %}
@@ -75,6 +82,9 @@ Exercises
 {% block body %}
 {% if user.is_authenticated and user.is_superuser %}
 <div class="form-background">
+<div id="create">
+    <h2><a href="{% url 'exercises_create'%}">Create an Exercise</a></h2>
+</div>
 {% for exercise in exercises %}
   <div class="class">
     <h2>{{ exercise.name }}</h2>

@@ -1,15 +1,16 @@
 bugs
 1. postgres doesn't save data
-2. css sucks many times
-3. can't create exercises or classes URL
-4. shouldn't bind docker socket - this also might cause win/linux issues
-5. if on windows, create env var COMPOSE_CONVERT_WINDOWS_PATHS=1
+2. shouldn't bind docker socket - this also might cause win/linux issues... try investigating docker in docker
+3. if on windows, create env var COMPOSE_CONVERT_WINDOWS_PATHS=1
 
 
-Label "submit here"
-revise view to ensure all logic is handled
-view to create class
-view to create exercise
+site properties
+    url
+    edit other properties
+    make 
+create xss1 bypass html filter exercise
+hard coded password exercise
+dynamically pass in password hash to exercise /root/answer.txt
 
 gradebook view: for each exercise, list students submissions(table)
     figure out how to put this in a table
@@ -18,15 +19,24 @@ gradebook view: for each exercise, list students submissions(table)
     Grade submitted exercises(check for same answers and if they got it right)
     email grades
 
-create xss1 bypass html filter exercise
-hard coded password exercise
+write documentation for creating a new exercise
+write documentation on how to use this app as student/admin
+get home deploy to work
 
-make install script to setup an admin users
-    prompt for username, password, email, first, last
-    start up exercises
 delete the test data url
+---------------------- Requirements finished------------------------------------------------ 
 
+Features
+--------------------------------------------------------------------------------------------
+create multiple choice question exercises
+import other people's docker containers
+impliment logging
+    create another field that logs each users attempt at an exercise
+test for vulns and flaws(anchore engine, sonarqube, owasp zap)
+further automated tests, javascript for niceness, nginx static delivery properly
 
+Exercises
+--------------------------------------------------------------------------------------------
 create xss2 exercise
 cross site forgory exercise
 sql injection exercise
@@ -34,17 +44,3 @@ buffer overflow exercise
 format string exercise
 make sure all of these automatically load upon startup
 dynamically pass in hash to a file
-
-impliment logging
-email grades button
-download to CSV
-
-create multiple choice question exercises
-create another field that logs each users attempt at an exercise
-
-write documentation for creating a new exercise
-write documentation on how to use this app as student/admin
-settings page allow alterations complete
-get home deploy to work
-test for vulns and flaws(anchore engine, sonarqube, owasp zap)
-further automated tests, javascript for niceness, nginx static delivery properly
