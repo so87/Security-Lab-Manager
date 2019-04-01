@@ -30,6 +30,8 @@ services:
     command: ${RUN_ENV}
     stdin_open: true
     tty: true
+    environment:
+      - RUN_ENV=${RUN_ENV}
     volumes:
       - ${PWD}/build/code/:/code
       - /var/run/docker.sock:/var/run/docker.sock

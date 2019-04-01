@@ -1,16 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.urls import reverse_lazy, reverse
 
 class Settings(models.Model):
     name = models.CharField(max_length=30)
-    ram = models.IntegerField()
-    cores = models.IntegerField()
-    instances = models.IntegerField()
+    hostname = models.CharField(max_length=30)
+    ram = models.IntegerField(validators=[MaxValueValidator(204800), MinValueValidator(512)])
+    cores = models.IntegerField(validators=[MaxValueValidator(12), MinValueValidator(1)])
+    instances = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)])
+
     class Meta:
         ordering = ['name']
     def __str__(self):
-        return self.name
+        return self.name+" at: "+self.hostname
     def get_absolute_url(self):
         # allows table to be shown in admin site
         return reverse('settings-detail', args=[str(self.id)])
@@ -21,6 +25,8 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+    def get_absolute_url(self):
+        return reverse('customuser-detail', args=[str(self.id)])
 
 class Submissions(models.Model):
     student = models.ForeignKey('CustomUser',on_delete=models.PROTECT)
@@ -67,4 +73,4 @@ class Classes(models.Model):
         return self.name
     def get_absolute_url(self):
         # allows table to be shown in admin site
-        return reverse('class', args=[str(self.id)])
+        return reverse('class-detail', args=[str(self.id)])

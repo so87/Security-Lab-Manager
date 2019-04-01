@@ -20,4 +20,7 @@ firewall-cmd --reload
 echo Creating Admin User... Enter carefully as you will only be prompted once
 ./create_admin.sh
 
+echo Setting up exercises...
+./setup_exercises.sh
+
 echo Use the "start-stop-linux|windows" scripts to run the application

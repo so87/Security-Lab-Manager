@@ -1,0 +1,60 @@
+{% extends "base_generic.html" %}
+{% block header %}
+<style>
+.form-background {
+    width: 90%;
+    height: 960px;
+    margin: 5%;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: grey;
+    text-align: left;
+    overflow-y: auto;
+}
+.addUser {
+    color: white;
+    width: 10%;
+    height: 35%;
+    background-color: grey;
+    margin: 1px;
+    padding: 2px;
+    opacity: .7;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.back {
+    position: abosolute;
+    left: .75%;
+    top: 35%;
+    height: 50px;
+    float: left;
+    text-align: center;
+    padding: 10px;
+}
+</style>
+{% if user.is_authenticated and user.is_superuser %}
+<a href="{% url 'instructor' %}">
+    <div class="addUser back">Back</div>
+</a>
+User
+{% else %}
+  <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated and user.is_superuser %}
+
+<div class="form-background">
+    <h3>First name: {{ customuser.first_name }}</h3>
+    <h3>Last name: {{ customuser.last_name }}</h3>
+    <h3>Username: {{ customuser.username }}</h3>
+    <h3>Email: {{ customuser.email }}</h3>
+</div>
+
+{% endif %}
+{% endblock %}

@@ -2,15 +2,8 @@ bugs
 1. postgres doesn't save data
 2. shouldn't bind docker socket - this also might cause win/linux issues... try investigating docker in docker
 3. if on windows, create env var COMPOSE_CONVERT_WINDOWS_PATHS=1
-
-
-site properties
-    url
-    edit other properties
-    make 
-create xss1 bypass html filter exercise
-hard coded password exercise
-dynamically pass in password hash to exercise /root/answer.txt
+4. setting too many cpu just slilently fails
+5. replicas and stack aren't support because docker-compose up is used to start
 
 gradebook view: for each exercise, list students submissions(table)
     figure out how to put this in a table
@@ -19,11 +12,13 @@ gradebook view: for each exercise, list students submissions(table)
     Grade submitted exercises(check for same answers and if they got it right)
     email grades
 
+create xss1 bypass html filter exercise
+hard coded password exercise
+dynamically pass in password hash to exercise /root/answer.txt
+
 write documentation for creating a new exercise
 write documentation on how to use this app as student/admin
-get home deploy to work
-
-delete the test data url
+get home deploy to work(dev generates test data and production doesnt)
 ---------------------- Requirements finished------------------------------------------------ 
 
 Features

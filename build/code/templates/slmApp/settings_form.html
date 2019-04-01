@@ -64,12 +64,13 @@ Manage Settings
 {% block body %}
 {% if user.is_authenticated and user.is_superuser %}
 <div class="form-background">
-    {% for setting in settings %}
-    <p> Instance Name: {{ setting.name }} </p> 
-    <p> Max Ram: {{ setting.ram }} </p>
-    <p> Max CPU Cores: {{ setting.cores }} </p>
-    <p> Max Ngninx Instances: {{ setting.instances }} </p>
-    {% endfor %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
 </div>
 {% endif %}
 {% endblock %}

@@ -13,6 +13,7 @@ from slmApp.models import Classes, Exercises, Submissions, Settings, CustomUser
 from slmApp.forms import LoginForm,SignUpForm,SubmitAnswer
 
 from slmApp.exercises import command
+from slmApp.site_stats import update_settings
 
 # The main login page
 def LoginView(request):
@@ -68,20 +69,19 @@ def SignupAdminView(request):
 def StudentView(request):
     form = SubmitAnswer()
     classes = Classes.objects.filter(students=request.user)
+    setting = Settings.objects.all()
+    print(setting)
     try: 
         submitted = Submissions.objects.get(student=request.user)
         submitted = submitted.exercises
     except Submissions.DoesNotExist:
         submitted = None
-    return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted':submitted})
+    return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted':submitted, 'setting':setting})
 @login_required
 def InstructorView(request):
     classes = Classes.objects.filter(instructor=request.user)
-    return render(request, 'admin.html', {'classes': classes})
-@login_required
-def InstructorSettingsView(request):
-    settings = Settings.objects.all()
-    return render(request, 'admin_settings.html', {'settings': settings})
+    setting = Settings.objects.get(pk=1)
+    return render(request, 'admin.html', {'classes': classes, 'setting':setting})
 
 # submitting answers to the exercises
 @login_required
@@ -140,7 +140,6 @@ def ClassesView(request):
     return render(request, 'details_classes.html', {'classes': classes})
 
 # Editing Database Items
-
 class ClassesCreate(CreateView):
     model = Classes
     fields = '__all__'
@@ -153,6 +152,9 @@ class ClassesDelete(DeleteView):
     model = Classes
     fields = '__all__'
     success_url = reverse_lazy('instructor')
+
+class ClassesDetailView(generic.DetailView):
+    model = Classes
 
 class ExercisesCreate(CreateView):
     model = Exercises
@@ -167,6 +169,9 @@ class ExercisesDelete(DeleteView):
     fields = '__all__'
     success_url = reverse_lazy('instructor')
 
+class ExercisesDetailView(generic.DetailView):
+    model = Exercises
+
 class CustomUserCreate(CreateView):
     model = CustomUser
     fields = '__all__'
@@ -179,6 +184,25 @@ class CustomUserDelete(DeleteView):
     model = CustomUser
     fields = '__all__'
     success_url = reverse_lazy('instructor')
+
+class StudentsDetailView(generic.DetailView):
+    model = CustomUser
+
+class SettingsUpdate(UpdateView):
+    model = Settings
+    fields = '__all__'
+    success_url = reverse_lazy('update_settings')
+
+@login_required
+def UpdateSettings(request):
+    setting = Settings.objects.get(pk=1)
+    update_settings.update_instances(setting.instances)
+    update_settings.update_ram_and_cpu(setting.ram,setting.cores)
+    return redirect('instructor')
+
+class SettingsDetailView(generic.DetailView):
+    model = Settings
+
 @login_required
 def StartExercise(request, StudentPK, ExercisePK):
     # ensure the user has authorization to start that exercise
@@ -330,6 +354,7 @@ def create_data():
 
     s = Settings()
     s.name = "Settings"
+    s.hostname = "localhost"
     s.ram = "4000"
     s.cores = "4"
     s.instances = "4"
