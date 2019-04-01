@@ -5,34 +5,36 @@ bugs
 4. shouldn't bind docker socket - this also might cause win/linux issues
 5. if on windows, create env var COMPOSE_CONVERT_WINDOWS_PATHS=1
 
-submissions view: for each student, list submission(table.)
-    make instructor view submissions for exercise
-        can't submit an exercise(user or in admin)
-        pretty sure filter to get submissions is wrong
-    test multiple users and multiple answers on multiple exercises
-gradebook view: for each exercise, list students submissions(table)
 
-
-get button to turn on docker container
-    customer user which exercise running
-    status button(port, default red, green if on, and massages)
-    link to exercise
-    status of exercises(flashing yellow jquery)(already running, already stopped)
 Label "submit here"
-change status of exercise to "already submitted" when done(js)
 revise view to ensure all logic is handled
-dynamically pass in hash to a file
+view to create class
+view to create exercise
 
-create xss1 exercise
+gradebook view: for each exercise, list students submissions(table)
+    figure out how to put this in a table
+    figure out how to give them correct or incorrect
+    print out nicely in HTML
+    Grade submitted exercises(check for same answers and if they got it right)
+    email grades
+
+create xss1 bypass html filter exercise
+hard coded password exercise
+
+make install script to setup an admin users
+    prompt for username, password, email, first, last
+    start up exercises
+delete the test data url
+
+
 create xss2 exercise
 cross site forgory exercise
 sql injection exercise
 buffer overflow exercise
 format string exercise
-hard coded password exercise
 make sure all of these automatically load upon startup
+dynamically pass in hash to a file
 
-Grade submitted exercises(check for same answers and if they got it right)
 impliment logging
 email grades button
 download to CSV
@@ -43,10 +45,6 @@ create another field that logs each users attempt at an exercise
 write documentation for creating a new exercise
 write documentation on how to use this app as student/admin
 settings page allow alterations complete
-make install script to setup an admin users
-    prompt for username, password, email, first, last
-    start up exercises
-delete the test data url
 get home deploy to work
 test for vulns and flaws(anchore engine, sonarqube, owasp zap)
 further automated tests, javascript for niceness, nginx static delivery properly

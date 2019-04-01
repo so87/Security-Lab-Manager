@@ -66,9 +66,14 @@ def SignupAdminView(request):
 # Correct Classes show up based on who you are
 @login_required
 def StudentView(request):
-    classes = Classes.objects.filter(students=request.user)
     form = SubmitAnswer()
-    return render(request, 'student.html', {'classes': classes, 'form': form})
+    classes = Classes.objects.filter(students=request.user)
+    try: 
+        submitted = Submissions.objects.get(student=request.user)
+        submitted = submitted.exercises
+    except Submissions.DoesNotExist:
+        submitted = None
+    return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted':submitted})
 @login_required
 def InstructorView(request):
     classes = Classes.objects.filter(instructor=request.user)
@@ -186,7 +191,7 @@ def StartExercise(request, StudentPK, ExercisePK):
     student_name = student.username
 
     # ensure the student isn't already running another container
-    if (student.exercises_running == 1):
+    if student.exercise_running is not None:
         return redirect('student')
 
     # run the exercise
@@ -194,11 +199,13 @@ def StartExercise(request, StudentPK, ExercisePK):
 
     # update containers running if it staretd successfully
     if(status != 1):
-        student.exercises_running = 1
+        student.exercise_running = Exercises.objects.get(pk=ExercisePK)
+        student.exercise_port = status
         student.save()
-    print("Exercises open: "+str(student.exercises_running))
+    print("Exercises open: "+str(student.exercise_running.name))
     # give the user back their port so they know where to go
     return redirect('student')
+
 @login_required
 def StopExercise(request, StudentPK, ExercisePK):
     # ensure the user has authorization to start that exercise
@@ -213,12 +220,12 @@ def StopExercise(request, StudentPK, ExercisePK):
     # run the exercise
     status = command.stop_container(student_name, exercise_name)
 
-    # update containers running if it staretd successfully
+    # update containers stopped successfully
     if(status == 0):
-        student.exercises_running = 0
+        student.exercise_running = None
         student.save()
-    print("Exercises open: "+str(student.exercises_running))
     return redirect('student')
+
 @login_required
 def RestartExercise(request, StudentPK, ExercisePK):
     # ensure the user has authorization to start that exercise
@@ -234,10 +241,11 @@ def RestartExercise(request, StudentPK, ExercisePK):
     status = command.restart_container(student_name, exercise_name)
 
     # update containers running if it staretd successfully
-    if(status == 0):
-        student.exercises_running = 0
+    if(status != 0):
+        student.exercise_running = Exercises.objects.get(pk=ExercisePK)
+        student.exercise_port = status
         student.save()
-    print("Exercises open: "+str(student.exercises_running))
+    print("Exercises open: "+str(student.exercise_running.name))
     return redirect('student')
 
 # Sample data to interact with

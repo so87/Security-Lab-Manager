@@ -1,0 +1,32 @@
+Users
+first_name - string
+last_name - string
+email - email
+username - string
+password - string
+exercises_running - integer
+
+Classes
+name - string
+description  - string
+students - ManyToMany(Users) 
+instructor - ManyToMany(Users) 
+exercises - ManyToMany(Exercises) 
+attempted - ManyToMany(Submissions)
+
+Exercises
+name - string
+description - string
+answer - string
+
+Submissions
+student - ForeignKey(Users)
+exercises - ForeignKey(Exercises)
+classes - ForeignKey(Classes)
+submitted_answer - String
+
+Settings
+name - String
+ram - Integer
+cores - Integer
+instances - Integer

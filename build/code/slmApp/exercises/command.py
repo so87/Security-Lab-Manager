@@ -53,8 +53,7 @@ def stop_container(student_name, exercise_name):
         container.stop()
     time.sleep(5)
 
-    status = container_running(student_name, exercise_name)
-    return status
+    return container_running(student_name, exercise_name)
 
 # ensure container is erased and remade
 def restart_container(student_name, exercise_name):

@@ -92,6 +92,10 @@
     border-radius: 10px;
     width: 40%;
     margin-top: 5px;
+    overflow: auto;
+}
+.status a {
+    color: white;
 }
 .exercisebuttons{
     clear: both;
@@ -126,8 +130,19 @@
 
 {% block body %}
 {% if user.is_authenticated %}
-<div class="form-background">
+<script type="text/javascript">
 
+$("document").ready(function(){
+    $('.status:contains(at)').css("background-color","green");
+    $('#submitted').each(function () {
+        if ($(this).text() == 'Submitted') {
+            $(this).css("background-color","green");
+        }
+    });
+});
+</script>
+
+<div class="form-background">
     {% for class in classes %}
     <div class="class">
         <h2>{{ class.name }}</h2>
@@ -137,7 +152,11 @@
                 <div class="exercise">
                     <h3>{{exercise.name}}</h3>
                     <div class="status">
-                        {{status}}
+                        {% if user.exercise_running == exercise %}
+                        Running at:<a href="http://localhost:{{user.exercise_port}}"> http://localhost:{{user.exercise_port}}</a>
+                        {% else %}
+                        Not Running
+                        {% endif %}
                     </div>
                     <div class="exercisebuttons">
                         <form class="btn" method="POST" action="{% url 'start_exercise' user.pk exercise.pk%}" class="btn">
@@ -156,7 +175,12 @@
                             {% csrf_token %}
                             {{ form.submitted }}
                         </form>
-                        <label class="btn">Not Submitted</label>
+
+                        {% if submitted.pk == exercise.pk %}
+                        <label id="submitted" class="btn">Submitted</label>
+                        {% else%}
+                        <label id="submitted" class="btn">Not Submitted</label>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

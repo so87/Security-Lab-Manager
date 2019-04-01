@@ -16,7 +16,9 @@ class Settings(models.Model):
         return reverse('settings-detail', args=[str(self.id)])
 
 class CustomUser(AbstractUser):
-    exercises_running = models.IntegerField(default=0)
+    exercise_running = models.ForeignKey('Exercises',on_delete=models.PROTECT, null=True)
+    exercise_port = models.IntegerField(null=True)
+
     def __str__(self):
         return self.username
 
