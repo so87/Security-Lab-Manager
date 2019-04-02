@@ -38,8 +38,11 @@ urlpatterns = [
     
     path('student/submit/<int:Cpk>/<int:Epk>', views.SubmitExerciseView, name='submit'),
     path('instructor/submissions/<int:Cpk>/<int:Epk>', views.SubmissionsView, name='submission_details'),
+    
+    # grades
     path('instructor/gradebook/<int:Cpk>', views.GradebookView, name='gradebook'),
-
+    path('instructor/gradebook/<int:Cpk>/email/', views.GradebookEmail, name='gradebook_email'),
+    
     # Start, Stop, and restart exercises
     path('student/<int:StudentPK>/<int:ExercisePK>/start/', views.StartExercise, name='start_exercise'),
     path('student/<int:StudentPK>/<int:ExercisePK>/restart/', views.RestartExercise, name='restart_exercise'),
@@ -49,4 +52,5 @@ urlpatterns = [
     path('instructor/settings/update/', views.UpdateSettings, name='update_settings'),
     path('instructor/settings/<int:pk>', views.SettingsDetailView.as_view(), name='settings-detail'),
     path('instructor/settings/<int:pk>/edit/', views.SettingsUpdate.as_view(), name='settings'),
+
 ]

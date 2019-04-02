@@ -162,6 +162,7 @@
             <h2>{{ class.name }}</h2>
             <a href="{% url 'classes_update' class.pk %}"><button type="submit" class="btn edit">Edit Class</button></a>
             <a href="{% url 'gradebook' class.pk %}"><button type="submit" class="btn edit">Gradebook</button></a>
+            <a href="{% url 'gradebook_email' class.pk %}"><button type="submit" class="btn edit">Email Grades</button></a>
         </div>
         <div class="exercises">
             {% for exercise in class.exercises.all %}
@@ -172,7 +173,6 @@
                         <button class="btn">Submissions</button>
                     </form>
                     <a href="{% url 'exercises_update' exercise.pk %}"><button type="submit" class="btn">Edit</button></a>
-                    <button type="submit" class="btn">Email Grades</button>
                 </div>
             {% endfor %}
         </div>

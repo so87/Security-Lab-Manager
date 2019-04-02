@@ -59,19 +59,13 @@
     text-decoration: none;
     font-size: 28px;
 }
-.grades {
-    width: 100%;
-    border-collapse: collapse;
-}
-.grades, th, td {
-    border: 1px solid black;
-}
+
 </style>
 {% if user.is_authenticated and user.is_superuser %}
 <a href="{% url 'instructor' %}">
     <div class="addUser back">Back</div>
 </a>
-{{classes.name}}'s Gradebook
+Email gradebook status
 {% else %}
   <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
 {% endif %}
@@ -80,28 +74,8 @@
 
 {% block body %}
 {% if user.is_authenticated and user.is_superuser %}
-<script type="text/javascript">
-$("document").ready(function(){
-    $('.grades td').each(function () {
-        if ($(this).text() == '1') {
-            $(this).css("background-color","green");
-        }
-    });
-    $('.grades td:contains(0)').css("background-color","red");
-    $('.grades tr:last').children().css("background-color","white");
-});
-</script>
-
 <div class="form-background">
-    <table class="grades">
-    {% for grade in grades %}
-    <tr>
-        {% for entry in grade%}
-            <td>{{entry}}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-    </table>
+    The email was: {{status}}
 </div>
 {% endif %}
 {% endblock %}

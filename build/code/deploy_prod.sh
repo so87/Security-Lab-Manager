@@ -8,8 +8,8 @@ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 50 | head -n 1 > A_MainSite/secr
 LINE='CSRF_COOKIE_SECURE = True'
 FILE=A_MainSite/settings.py
 grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
-LINE='SESSION_COOKIE_SECURE = True'
-grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+#LINE='SESSION_COOKIE_SECURE = True'
+#grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
 
 # collect static files
 rm -rf /code/static/*

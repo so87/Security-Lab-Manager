@@ -67,19 +67,11 @@
     border: 1px solid black;
 }
 </style>
-{% if user.is_authenticated and user.is_superuser %}
-<a href="{% url 'instructor' %}">
-    <div class="addUser back">Back</div>
-</a>
 {{classes.name}}'s Gradebook
-{% else %}
-  <p>You are not logged in: <a href="{% url 'login' %}">login</a></p>
-{% endif %}
 {% endblock %}
 
 
 {% block body %}
-{% if user.is_authenticated and user.is_superuser %}
 <script type="text/javascript">
 $("document").ready(function(){
     $('.grades td').each(function () {
@@ -93,6 +85,7 @@ $("document").ready(function(){
 </script>
 
 <div class="form-background">
+    <p>{{email_description}}</p>
     <table class="grades">
     {% for grade in grades %}
     <tr>
@@ -103,5 +96,4 @@ $("document").ready(function(){
     {% endfor %}
     </table>
 </div>
-{% endif %}
 {% endblock %}

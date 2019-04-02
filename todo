@@ -4,33 +4,40 @@ bugs
 3. if on windows, create env var COMPOSE_CONVERT_WINDOWS_PATHS=1
 4. setting too many cpu just slilently fails
 5. replicas and stack aren't support because docker-compose up is used to start
+6. duplicate css
+7. johndoe submitted label not green
 
 gradebook view: for each exercise, list students submissions(table)
-    figure out how to put this in a table
-    figure out how to give them correct or incorrect
-    print out nicely in HTML
+    get unique hash generated
     Grade submitted exercises(check for same answers and if they got it right)
-    email grades
-
+dynamically pass in password hash to exercise /root/answer.txt
+get home deploy to work(dev generates test data and production doesnt)
 create xss1 bypass html filter exercise
 hard coded password exercise
-dynamically pass in password hash to exercise /root/answer.txt
 
-write documentation for creating a new exercise
-write documentation on how to use this app as student/admin
-get home deploy to work(dev generates test data and production doesnt)
 ---------------------- Requirements finished------------------------------------------------ 
 
-Features
+Enhancements
 --------------------------------------------------------------------------------------------
 create multiple choice question exercises
 import other people's docker containers
+compare answers on virtual machines to see if people are cheating
 impliment logging
     create another field that logs each users attempt at an exercise
+    log the entire sites performance so admins can adjust performance
+get easy deploy on AWS, docker swarm, docker-comopse
+    make this easy deploy auto setup ssl certs if you have a domain name
 test for vulns and flaws(anchore engine, sonarqube, owasp zap)
-further automated tests, javascript for niceness, nginx static delivery properly
+automated tests
+jquery for niceness
+nginx static delivery properly
+create guides for users and admins
+import full vmware or virtual box virtual machines
+auto generate docker containers via GUI form (web or ssh)
+imput your own email settings
+only send individual grades to people
 
-Exercises
+Addiontal Exercises
 --------------------------------------------------------------------------------------------
 create xss2 exercise
 cross site forgory exercise

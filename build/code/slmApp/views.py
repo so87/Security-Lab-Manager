@@ -14,6 +14,7 @@ from slmApp.forms import LoginForm,SignUpForm,SubmitAnswer
 
 from slmApp.exercises import command
 from slmApp.site_stats import update_settings
+from slmApp.email import send_mail
 
 # The main login page
 def LoginView(request):
@@ -69,14 +70,13 @@ def SignupAdminView(request):
 def StudentView(request):
     form = SubmitAnswer()
     classes = Classes.objects.filter(students=request.user)
-    setting = Settings.objects.all()
-    print(setting)
+    settings = Settings.objects.get(pk=1)
     try: 
         submitted = Submissions.objects.get(student=request.user)
         submitted = submitted.exercises
     except Submissions.DoesNotExist:
         submitted = None
-    return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted':submitted, 'setting':setting})
+    return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted':submitted, 'settings':settings})
 @login_required
 def InstructorView(request):
     classes = Classes.objects.filter(instructor=request.user)
@@ -104,26 +104,66 @@ def SubmissionsView(request, Cpk, Epk):
     if request.method == 'POST':
         submissions = Submissions.objects.filter(classes=Cpk).filter(exercises=Epk)
         return render(request, 'details_submissions.html', {'submissions': submissions})
-
-@login_required
-def GradebookView(request, Cpk):
+def getGrades(Cpk):
     classes = Classes.objects.get(pk=Cpk)
     students = classes.students.all()
     exercises = classes.exercises.all()
     
-    # exercise is the row
+    grades = [["Exercise",],]
+    for student in students:
+        grades[0].append(student.username)
+    # fill out list of zeros for initial percentages
+    columns = len(students)
+    percentages = []
+    for i in range(0,columns):
+        percentages.append([0,0])
+
+    # Exercise Name | user1 | user2 | ...
+    index = 1
+    col = 0
     for exercise in exercises:
-        # students are the columns
+        submissions = Submissions.objects.filter(classes=Cpk).filter(exercises=exercise.pk)
+        answer = exercise.answer
+        grades.append([exercise.name,])
         for student in students:
             # check if student submitted an answer for this exercise
-            grades += Submissions.objects.filter(classes=Cpk).filter(exercises=exercise.id)
-
+            submitted = submissions.filter(student=student).values_list('submitted',flat=True).first()
             # decide if user got the correct answer or not (zero if not submitted)
+            if not submitted:
+                print("They didn't submit")
+                grades[index].append("0")
+            elif submitted == answer:
+                print("they are right")
+                grades[index].append("1")
+                percentages[col][0] += 1
+            else:
+                print("they are wrong")
+                grades[index].append("0")
+            percentages[col][1] += 1
+            col += 1
+        col = 0
+        index += 1
+    # append percentage to last row
+    grades.append(["Percentage",])
+    for i in range(0,columns):
+        score = percentages[i][0] / percentages[i][1]
+        score = score * 100
+        grades[index].append(score)
+    return grades
     
-    print(grades)
-    print(students)
-    print(exercises)
-    return render(request, 'details_gradebook.html', {'classes': classes,})
+@login_required
+def GradebookView(request, Cpk):
+    classes = Classes.objects.get(pk=Cpk)
+    grades  = getGrades(Cpk)
+    return render(request, 'details_gradebook.html', {'classes': classes, 'grades':grades,})
+
+@login_required
+def GradebookEmail(request, Cpk):
+    # get grades
+    grades = getGrades(Cpk)
+    # returns if it was successful or not
+    status = send_mail.send_grades(Cpk, grades, request)
+    return render(request, 'gradebook_email_status.html', {'status':status})
 
 # Viewing Database Items
 @login_required

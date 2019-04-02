@@ -177,7 +177,7 @@ $("document").ready(function(){
                     <h3>{{exercise.name}}</h3>
                     <div class="status">
                         {% if user.exercise_running == exercise %}
-                        Running at:<a href="http://localhost:{{user.exercise_port}}"> http://localhost:{{user.exercise_port}}</a>
+                        Running at:<a href="http://{{settings.hostname}}:{{user.exercise_port}}"> http://{{settings.hostname}}:{{user.exercise_port}}</a>
                         {% else %}
                         Not Running
                         {% endif %}
