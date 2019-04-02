@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from slmApp.models import Classes, Exercises, Submissions, Settings, CustomUser
 from slmApp.forms import LoginForm,SignUpForm,SubmitAnswer
 
-from slmApp.exercises import command
+from slmApp.exercises import command,generate_hash
 from slmApp.site_stats import update_settings
 from slmApp.email import send_mail
 
@@ -108,7 +108,8 @@ def getGrades(Cpk):
     classes = Classes.objects.get(pk=Cpk)
     students = classes.students.all()
     exercises = classes.exercises.all()
-    
+    answer = ''
+
     grades = [["Exercise",],]
     for student in students:
         grades[0].append(student.username)
@@ -123,12 +124,12 @@ def getGrades(Cpk):
     col = 0
     for exercise in exercises:
         submissions = Submissions.objects.filter(classes=Cpk).filter(exercises=exercise.pk)
-        answer = exercise.answer
         grades.append([exercise.name,])
         for student in students:
             # check if student submitted an answer for this exercise
             submitted = submissions.filter(student=student).values_list('submitted',flat=True).first()
             # decide if user got the correct answer or not (zero if not submitted)
+            answer = generate_hash.gen(student, exercise, classes.instructor.first())
             if not submitted:
                 print("They didn't submit")
                 grades[index].append("0")
@@ -150,7 +151,7 @@ def getGrades(Cpk):
         score = score * 100
         grades[index].append(score)
     return grades
-    
+
 @login_required
 def GradebookView(request, Cpk):
     classes = Classes.objects.get(pk=Cpk)
@@ -244,8 +245,9 @@ class SettingsDetailView(generic.DetailView):
     model = Settings
 
 @login_required
-def StartExercise(request, StudentPK, ExercisePK):
+def StartExercise(request, StudentPK, ExercisePK, ClassPK):
     # ensure the user has authorization to start that exercise
+    classes = Classes.objects.get(pk=ClassPK)
     student = CustomUser.objects.get(pk=StudentPK)
     # finds student and their exercise to run
     exercise = Exercises.objects.get(pk=ExercisePK)
@@ -259,7 +261,9 @@ def StartExercise(request, StudentPK, ExercisePK):
         return redirect('student')
 
     # run the exercise
-    status = command.run_container(student_name, exercise_name)
+    # pass in answer to that container
+    answer = generate_hash.gen(student, exercise, classes.instructor.first())
+    status = command.run_container(student_name, exercise_name, answer)
 
     # update containers running if it staretd successfully
     if(status != 1):
@@ -291,8 +295,9 @@ def StopExercise(request, StudentPK, ExercisePK):
     return redirect('student')
 
 @login_required
-def RestartExercise(request, StudentPK, ExercisePK):
+def RestartExercise(request, StudentPK, ExercisePK, ClassPK):
     # ensure the user has authorization to start that exercise
+    classes = Classes.objects.get(pk=ClassPK)
     student = CustomUser.objects.get(pk=StudentPK)
     # finds student and their exercise to run
     exercise = Exercises.objects.get(pk=ExercisePK)
@@ -302,7 +307,8 @@ def RestartExercise(request, StudentPK, ExercisePK):
     student_name = student.username
 
     # restart the exercise
-    status = command.restart_container(student_name, exercise_name)
+    answer = generate_hash.gen(student, exercise, classes.instructor.first())
+    status = command.restart_container(student_name, exercise_name, answer)
 
     # update containers running if it staretd successfully
     if(status != 0):

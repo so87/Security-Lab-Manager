@@ -157,7 +157,7 @@
 <script type="text/javascript">
 
 $("document").ready(function(){
-    $('.status:contains(at)').css("background-color","green");
+    $('.status:contains(on)').css("background-color","green");
     $('#submitted').each(function () {
         if ($(this).text() == 'Submitted') {
             $(this).css("background-color","green");
@@ -177,17 +177,17 @@ $("document").ready(function(){
                     <h3>{{exercise.name}}</h3>
                     <div class="status">
                         {% if user.exercise_running == exercise %}
-                        Running at:<a href="http://{{settings.hostname}}:{{user.exercise_port}}"> http://{{settings.hostname}}:{{user.exercise_port}}</a>
+                        Running on port: <a href="http://{{settings.hostname}}:{{user.exercise_port}}">{{user.exercise_port}}</a>
                         {% else %}
                         Not Running
                         {% endif %}
                     </div>
                     <div class="exercisebuttons">
-                        <form class="btn" method="POST" action="{% url 'start_exercise' user.pk exercise.pk%}" class="btn">
+                        <form class="btn" method="POST" action="{% url 'start_exercise' user.pk class.pk exercise.pk%}" class="btn">
                             {% csrf_token %}
                             <button type="submit">Start</button>
                         </form>
-                        <form class="btn" method="POST" action="{% url 'restart_exercise' user.pk exercise.pk%}" class="btn">
+                        <form class="btn" method="POST" action="{% url 'restart_exercise' user.pk class.pk exercise.pk%}" class="btn">
                             {% csrf_token %}
                             <button type="submit">Reset</button>
                         </form>

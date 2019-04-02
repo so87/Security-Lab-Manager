@@ -20,10 +20,6 @@ def send_grades(Cpk, grades, request):
     
     context = {'classes': class_inst, 'grades':grades, 'user':request.user,'email_description':email_description}
     html_content = render_to_string('gradebook_email.html',context) # render with dynamic value
-    
-    # remove all a tags from the "header" block
-
-
     text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
 
     # create the email, and attach the HTML version as well.

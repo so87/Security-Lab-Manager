@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose exec web-django sh
+docker-compose exec web-django bash

@@ -17,6 +17,9 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-port=8443/tcp --permanent
 firewall-cmd --reload
 
+echo Creating folder to store data
+mkdir data
+
 echo Creating Admin User... Enter carefully as you will only be prompted once
 ./create_admin.sh
 

@@ -44,8 +44,8 @@ urlpatterns = [
     path('instructor/gradebook/<int:Cpk>/email/', views.GradebookEmail, name='gradebook_email'),
     
     # Start, Stop, and restart exercises
-    path('student/<int:StudentPK>/<int:ExercisePK>/start/', views.StartExercise, name='start_exercise'),
-    path('student/<int:StudentPK>/<int:ExercisePK>/restart/', views.RestartExercise, name='restart_exercise'),
+    path('student/<int:StudentPK>/<int:ClassPK>/<int:ExercisePK>/start/', views.StartExercise, name='start_exercise'),
+    path('student/<int:StudentPK>/<int:ClassPK>/<int:ExercisePK>/restart/', views.RestartExercise, name='restart_exercise'),
     path('student/<int:StudentPK>/<int:ExercisePK>/stop/', views.StopExercise, name='stop_exercise'),
 
     # Views for settings

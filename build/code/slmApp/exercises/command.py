@@ -15,7 +15,7 @@ def container_running(student_name, exercise_name):
     else:
         return 0
 
-def run_container(student_name, exercise_name):
+def run_container(student_name, exercise_name, answer):
     if container_running(student_name, exercise_name):
         print("Container already running")
         return 1
@@ -23,12 +23,16 @@ def run_container(student_name, exercise_name):
     # find open port
     port = port_allocator.open()
 
-    # generate hash and pass it to container
+    # put hash in answer file for that exercise and pass it to container
+    with open("/code/slmApp/exercises/builds/"+exercise_name+"/root.txt", "w") as text_file:
+        print(answer, file=text_file)
 
+    # build the docker image locally with the new root.txt file
+    client.images.build(path="slmApp/exercises/builds/"+exercise_name, tag="simonowens157/"+exercise_name)
 
     # start up container
     args = exercise_name+" "+student_name+" "+str(port)+" up"
-    command = "cd slmApp/exercises/run_configs/ && ./run.sh "+args
+    command = "cd slmApp/exercises/builds/ && ./run.sh "+args
     print("Running: "+ command)
     subprocess.call(command, shell=True)
     time.sleep(5)
@@ -56,7 +60,7 @@ def stop_container(student_name, exercise_name):
     return container_running(student_name, exercise_name)
 
 # ensure container is erased and remade
-def restart_container(student_name, exercise_name):
+def restart_container(student_name, exercise_name, answer):
     stop_container(student_name, exercise_name)
     # remove the stopped container
     status = {"name": exercise_name+student_name,}
@@ -64,5 +68,5 @@ def restart_container(student_name, exercise_name):
     for container in containers:
         container.remove()
 
-    status =  run_container(student_name, exercise_name)
+    status =  run_container(student_name, exercise_name, answer)
     return status
