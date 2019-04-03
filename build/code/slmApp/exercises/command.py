@@ -32,7 +32,7 @@ def run_container(student_name, exercise_name, answer):
 
     # start up container
     args = exercise_name+" "+student_name+" "+str(port)+" up"
-    command = "cd slmApp/exercises/builds/ && ./run.sh "+args
+    command = "cd slmApp/exercises/builds/ && whoami && ls -lah && ./run.sh "+args
     print("Running: "+ command)
     subprocess.call(command, shell=True)
     time.sleep(5)

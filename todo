@@ -6,8 +6,12 @@ bugs
 5. replicas and stack aren't support because docker-compose up is used to start
 6. duplicate css
 7. johndoe submitted label not green
+8. get home deploy to work (permissions being weird)
+9. users can't view gradebook, but they can send out the email
+10. does not turn off exercise on logout
 
-get home deploy to work(dev generates test data and production doesnt)
+todo
+----
 create weak authentication (just redirect)
 c++ hard coded password
 create hard coded password(checks a static file)
@@ -18,6 +22,10 @@ create xss1 bypass html filter exercise
 Enhancements
 --------------------------------------------------------------------------------------------
 create multiple choice question exercises
+travis ci auto test and post go github page
+travis ci auto format all files
+travis ci setup private sonarqube and anchore engine
+nightly deploy to home network
 import other people's docker containers
 compare answers on virtual machines to see if people are cheating
 able to upload files
