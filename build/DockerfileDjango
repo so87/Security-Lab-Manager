@@ -3,9 +3,12 @@ FROM $django
 
 WORKDIR /code
 COPY code/ .
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt;\
+    chmod +x deploy_prod.sh;\
+    chmod +x deploy_dev.sh;\
+    chmod +x start-django.sh;\
+    chmod +x slmApp/exercises/builds/run.sh
 
 ENV PYTHONUNBUFFERED 1
 # Expose
 EXPOSE 8080
-CMD [ "python", "/code/manage.py runserver 0.0.0.0:8080" ]

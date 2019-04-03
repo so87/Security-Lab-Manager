@@ -8,15 +8,15 @@ nginx=nginx:latest
 
 # django container build
 target="simonowens157/django:v1.0"
-docker build . -t "$target" -f DockerfileDjango --build-arg django=$django
+docker build --no-cache -t "$target" -f DockerfileDjango --build-arg django=$django .
 docker push "$target"
 
 # database container build
 target="simonowens157/postgresql:v1.0"
-docker build . -t "$target" -f DockerfilePostgresql --build-arg postgresql=$postgresql
+docker build --no-cache -t "$target" -f DockerfilePostgresql --build-arg postgresql=$postgresql .
 docker push "$target"
 
 # proxy container build
 target="simonowens157/$nginx"
-docker build . -t "$target" -f DockerfileNginx --build-arg nginx=$nginx
+docker build --no-cache -t "$target" -f DockerfileNginx --build-arg nginx=$nginx .
 docker push "$target"

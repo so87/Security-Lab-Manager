@@ -1,21 +1,20 @@
 version: '3.1'
 
 services:
-  db_django:
+  db-django:
     image: simonowens157/postgresql:v1.0
     restart: always
-    container_name: django_db
+    container_name: standalone-db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - "${PWD}"/data:/var/lib/postgresql_data
+      - ${PWD}/data/:/var/lib/postgresql_data
     networks:
       - djangonet
-
-  nginx:
+  nginx-django:
     image: simonowens157/nginx:latest
-    container_name: nginx_server
+    container_name: standlone-nginx
     restart: always
     environment:
       - VIRTUAL_HOST=ctfapp.owens-netsec.com
@@ -23,23 +22,28 @@ services:
       - LETSENCRYPT_EMAIL=simonowens157@gmail.com
       - VIRTUAL_PORT=80
     networks:
-    - djangonet
-  
-  web:
+      - djangonet
+      - default
+  web-django:
     image: simonowens157/django:v1.0
-    container_name: django_server
+    container_name: standlone-django
     restart: always
-    command: bash -c "sh production_deploy.sh && sh start-django.sh"
+    command: ${RUN_ENV}
+    stdin_open: true
+    tty: true 
+    environment:
+      - RUN_ENV=${RUN_ENV}
     volumes:
-      - "${PWD}"/code/:/code
+      - ${PWD}/code/:/code
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - djangonet
     depends_on:
-      - db_django
-      - nginx
+      - db-django
+      - nginx-django
     
 networks:
+  djangonet:
   default:
     external:
       name: webproxy
