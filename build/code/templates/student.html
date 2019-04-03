@@ -123,7 +123,7 @@
     margin: 0;
     padding: 0;
 }
-#submitted{
+.submitted{
     font-size: 16px; 
     font-size: 1vw;
     padding: 0;
@@ -158,9 +158,24 @@
 
 $("document").ready(function(){
     $('.status:contains(on)').css("background-color","green");
-    $('#submitted').each(function () {
+    $('.submitted').each(function () {
         if ($(this).text() == 'Submitted') {
             $(this).css("background-color","green");
+        }
+    });
+    
+    $("#start button").click(function(){
+        var e_running = "{{user.exercise_running}}";
+		if(e_running !== "None")
+        {
+            window.alert("There is an exercise already running!");
+        }
+    });
+    $("#stop button").click(function(){
+        var e_running = "{{user.exercise_running}}";
+		if(e_running == "None")
+        {
+            window.alert("There are no exercises running!");
         }
     });
 });
@@ -183,7 +198,7 @@ $("document").ready(function(){
                         {% endif %}
                     </div>
                     <div class="exercisebuttons">
-                        <form class="btn" method="POST" action="{% url 'start_exercise' user.pk class.pk exercise.pk%}" class="btn">
+                        <form id="start" class="btn" method="POST" action="{% url 'start_exercise' user.pk class.pk exercise.pk%}" class="btn">
                             {% csrf_token %}
                             <button type="submit">Start</button>
                         </form>
@@ -191,7 +206,7 @@ $("document").ready(function(){
                             {% csrf_token %}
                             <button type="submit">Reset</button>
                         </form>
-                        <form class="btn" method="POST" action="{% url 'stop_exercise' user.pk exercise.pk%}" class="btn">
+                        <form id="stop" class="btn" method="POST" action="{% url 'stop_exercise' user.pk exercise.pk%}" class="btn">
                             {% csrf_token %}
                             <button type="submit">Stop</button>
                         </form>
@@ -200,11 +215,10 @@ $("document").ready(function(){
                             {% csrf_token %}
                             <div id="answer">{{ form.submitted }}</div>
                         </form>
-
-                        {% if submitted.pk == exercise.pk %}
-                        <label id="submitted" class="btn">Submitted</label>
+                        {% if exercise.pk in submitted_exercises %}
+                                <label class="btn submitted">Submitted</label>
                         {% else%}
-                        <label id="submitted" class="btn">Not Submitted</label>
+                                <label class="btn submitted">Not Submitted</label>
                         {% endif %}
                     </div>
                 </div>

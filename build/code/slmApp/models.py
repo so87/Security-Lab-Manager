@@ -32,7 +32,7 @@ class Submissions(models.Model):
     student = models.ForeignKey('CustomUser',on_delete=models.PROTECT)
     exercises = models.ForeignKey('Exercises',on_delete=models.PROTECT)
     classes = models.ForeignKey('Classes',on_delete=models.PROTECT)
-    submitted = models.CharField(max_length=50)
+    submitted = models.CharField(max_length=70)
     def filter_students(self, pk_list):
         return self.student.filter(pk__in=pk_list)
     class Meta:

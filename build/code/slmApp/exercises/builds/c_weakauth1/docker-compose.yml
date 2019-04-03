@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  c_weakauth1:
+    image: simonowens157/c_weakauth1
+    container_name: ${container_name}
+    ports: 
+      - "${container_port}:22"
+    networks:
+      - praticenet
+
+networks:
+  praticenet:
+    driver: bridge

@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset ="utf-8">
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+}
+.background {
+    width: 100%;
+    z-index: -1;
+}
+.buy {
+    width: 20%;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    background-color: #AA8439;
+    opacity: .7;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    margin: 0;
+}
+.cover {
+    width: 100%;
+}
+.link {
+    width: 20%;
+    float: right;
+}
+.desktop {
+    position: relative;
+}
+.desktop h2 {
+    color: white;
+    background-color: #AA8439;
+    opacity: .8;
+    margin: -5px 0 0 0;
+    padding: 0;
+}
+.links {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    position: absolute;
+    bottom: 5%;
+}
+.links li {
+    list-style: none;
+}
+.links a {
+    color: #AA8439;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: bolder;
+}
+.login{
+    color: white;
+    background-color: #AA8439;
+    opacity: .9;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    padding: 2.5%;
+    margin: 1%;
+}
+.login h2 {
+    text-align: center;
+}
+.login button {
+    width: 30%;
+    margin-left: 35%;
+}
+
+.mobile {
+    display: none;
+}
+
+@media screen and (max-width: 700px){
+.desktop {
+    display: none;
+}
+.mobile {
+    display: block;
+}
+.mobile h1 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.mobile a {
+    text-align: center;
+    text-decoration: none;
+    margin: -5px 0 0 0;
+    padding: 0;
+}
+.buy {
+    width: 10%;
+    font-size: 28px;
+}
+.mobile a h2 {
+    color: white;
+    background-color: #AA8439;
+    opacity: .8;
+    margin: 5px 0;
+    padding: 0;
+}
+}
+</style>
+<title>Weak Auth 1 - Hack away!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+function check() {
+  var usr, pss;
+  usr = document.getElementById("usr");
+  pass = document.getElementById("pass");
+
+  if((usr.value.match("simon")) && (pass.value.match("password")))
+  {
+    window.location.replace("secret/root.txt");
+  }
+  else
+  {
+    window.alert("incorrect");
+  }
+}
+</script>
+
+<div class="desktop">
+    <img src="background.jpg" class="background">
+    <h2 class="buy">Buy Now!</h2>
+    <div class="login">
+        <h2>Customer Portal</h2>
+        <label>Username</label>
+        <input type="text" id="usr" required>
+        <label>Password</label>
+        <input type="text" id="pass" required>
+        <button onclick="check()">Login</button>
+    </div>
+
+    <ul class="links">
+        <li><a href="#">The Game</a></li>
+        <li><a href="#">The Characters</a></li>
+        <li><a href="#">The Design</a></li>
+        <li><a href="#">Contact Nintendo</a></li>
+    </ul>
+</div>
+
+<div class="mobile">
+    <img src="cover.jpg" class="cover">
+    <h2 class="buy">Buy Now!</h2>
+    <h1>Legend of Zelda: Breath of the Wild</h1>
+    <img src="link.png" class="link">
+    <p>
+    The Legend of Zelda: Breath of the Wild[1] is an action-adventure video game developed and published by Nintendo for the Nintendo Switch and Wii U video game consoles. The game is a part of The Legend of Zelda series, and follows amnesiac protagonist Link, who awakens from a hundred-year slumber to a mysterious voice that guides him to defeat Calamity Ganon before he can destroy the kingdom of Hyrule.
+    </br></br>
+    The title's gameplay and mechanics constitute a departure from the series' usual conventions, featuring an open-world environment, a detailed physics engine, high-definition visuals, and voice acting. Announced in 2013, the game was initially planned for release as a Wii U exclusive in 2015, but was delayed twice prior to its release on March 3, 2017. Breath of the Wild was a launch title for the Switch, as well as the final Nintendo-produced game for the Wii U.
+    </br></br>
+    Breath of the Wild received universal acclaim from critics, who deemed it to be one of the greatest video games of all time. Critics praised the game's open-ended, physics-driven gameplay that encourages player experimentation and exploration, with many calling it a landmark title in open-world game design, although minor criticism was directed at the game's technical performance at launch.
+    </br></br>
+    </p>
+    <a href="#"><h2>The Game</h2></a>
+    <a href="#"><h2>The Characters</h2></a>
+</div>
+</body></html>

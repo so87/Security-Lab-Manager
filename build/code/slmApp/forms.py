@@ -24,4 +24,4 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 class SubmitAnswer(forms.Form):
-    submitted = forms.CharField(max_length=50)
+    submitted = forms.CharField(max_length=70)

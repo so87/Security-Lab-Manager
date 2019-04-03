@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+<head>
+
+<meta charset ="utf-8">
+<style type="text/css">
+
+body {
+	margin: 0;
+	padding: 0;
+}
+.background {
+    position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+.logo {
+    width: 15%;
+    float: left;
+    margin-left: 10%;
+}
+.nav {
+    height: 50px;
+    width: 100%;
+    margin-top: 5%;
+    background-color: white;
+}
+.nav ul{
+    padding-left: 40%;
+    list-style: none;
+    margin: 0;
+}
+.nav a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+.nav li{
+    float: left;
+    padding: 1% 8% 1% 0;
+}
+
+.form {
+    clear: both;
+    background-color: rgba(255,255,255,.8);
+    width: 30%;
+    margin-top: 15%;
+    margin-left: 10%;
+}
+.form form {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    margin: .5%;
+}
+.form h1 {
+    text-align: center;
+    margin: auto;
+    padding: 4%;
+    color: #52237F
+}
+.form form li {
+    margin: 2% 0;
+    list-style: none;
+}
+.form form label {
+    font-size: 20px;
+}
+.form form input {
+    background-color: #52237F;
+    width: 50%;
+}
+
+</style>
+<title>Weak Auth 3 - Hack Away!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+<body>
+<img src="hamletFencing.jpg" class="background">
+<div class="nav">
+    <img src="hamletLogo.jpg" class="logo">
+    <ul>
+        <a href="#"><li>Home</li></a>
+        <a href="#"><li>Shanklin</li></a>
+        <a href="#"><li>Hamlet</li></a>
+        <a href="#"><li>Events</li></a>
+        <a href="#"><li>Contact Us</li></a>
+    </ul>
+</div>
+<div class="form">
+    <h1>Learn More!</h1>
+    <form>
+        <ul>
+            <li>
+                <label>Name:</label><input type="text" name="fname">
+            </li>
+            <li>
+                <label>Email Address: </label><input type="text" name="lname">
+            </li>
+            <li>
+                <label>Telephone: </label><input type="text" name="lname">
+            </li>
+            <li>
+                <label>I am interested in: </label>
+                <select name="choices">
+                    <option value="Learning More">Learning More</option>
+                    <option value="Visiting Campus">Visiting Campus</option>
+                    <option value="Meeting with a Faculty Member">Meeting with a Faculty Member</option>
+                    <option value="Applying">Applying</option>
+                </select>   
+            </li>
+        </ul>
+    </form>
+</div>
+
+</body>
+</html>

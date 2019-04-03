@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  xss1:
+    image: simonowens157/weakauth1
+    container_name: ${container_name}
+    ports:
+      - "${container_port}:80"
+    networks:
+      - praticenet
+
+networks:
+  praticenet:
+    driver: bridge

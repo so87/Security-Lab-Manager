@@ -72,11 +72,10 @@ def StudentView(request):
     classes = Classes.objects.filter(students=request.user)
     settings = Settings.objects.get(pk=1)
     try: 
-        submitted = Submissions.objects.get(student=request.user)
-        submitted = submitted.exercises
+        submitted_exercises = Submissions.objects.filter(student=request.user).values_list('exercises',flat=True)
     except Submissions.DoesNotExist:
         submitted = None
-    return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted':submitted, 'settings':settings})
+    return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted_exercises':submitted_exercises, 'settings':settings})
 @login_required
 def InstructorView(request):
     classes = Classes.objects.filter(instructor=request.user)
@@ -345,27 +344,42 @@ def create_data():
     u3.last_name = 'doberts'
     u3.save()
 
+
+    wa1 = Exercises.objects.create(name='Weak Auth 1', description='The login page is broken! Find out how to get the secret key!')
+    wa1.save()
+    wa2 = Exercises.objects.create(name='Weak Auth 2', description='How does the login page work?')
+    wa2.save()
+    wa3 = Exercises.objects.create(name='Weak Auth 3', description='You might be able to execute some privileged actions')
+    wa3.save()
+    e3 = Exercises.objects.create(name='XSS 1', description='Bypass the HTML input filter. An admin is trying to login every 30seconds!')
+    e3.save()
+
     e1 = Exercises()
     e1.name = 'SQL Injection'
     e1.description = 'Give an example of SQL injection on port 8882'
-    e1.answer = 'asdfasdf1231234'
     e1.save()
     e2 = Exercises()
     e2.name = 'SQL Injection 2'
     e2.description = 'Give an example of SQL injection on port 12834'
-    e2.answer = 'asdfasdf1231234'
     e2.save()
-    e3 = Exercises()
-    e3.name = 'XSS 1'
-    e3.description = 'Give an example of SQL injection on port 8582'
-    e3.answer = 'asdfasdf1231234'
-    e3.save()
     e4 = Exercises()
     e4.name = 'Buffer Overflow'
     e4.description = 'Give an example of Buffer overflow on port 8812'
-    e4.answer = 'asdfasdf1231234'
     e4.save()
 
+    c2 = Classes()
+    c2.name = 'Desktop Security Fall 2018'
+    c2.description = 'Taught by Mr. Randall'
+    c2.save()
+    c2.instructor.add(u1)
+    c2.exercises.add(e3)
+    c2.exercises.add(wa1)
+    c2.exercises.add(wa2)
+    c2.exercises.add(wa3)
+    c2.students.add(u4)
+    c2.students.add(u5)
+    c2.students.add(u6)
+    c2.save()
     c1 = Classes()
     c1.name = 'Desktop Security Fall 2017'
     c1.description = 'Taught by Ron Doberts'
@@ -376,16 +390,6 @@ def create_data():
     c1.students.add(u4)
     c1.students.add(u5)
     c1.save()
-    c2 = Classes()
-    c2.name = 'Desktop Security Fall 2018'
-    c2.description = 'Taught by Mr. Randall'
-    c2.save()
-    c2.instructor.add(u1)
-    c2.exercises.add(e3)
-    c2.students.add(u4)
-    c2.students.add(u5)
-    c2.students.add(u6)
-    c2.save()
     c3 = Classes()
     c3.name = 'Web Security Spring 2019'
     c3.description = 'Taught by Dr. Hwang'

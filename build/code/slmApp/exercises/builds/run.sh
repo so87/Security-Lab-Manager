@@ -9,7 +9,7 @@ export container_port=$3
 export container_name=$1$2
 
 if [ "$4" = "up" ]; then
-    docker-compose -p $container_name -f $1/$1.yml $4 -d
+    docker-compose -p $container_name -f $1/docker-compose.yml $4 -d
 else
-    docker-compose -p $container_name -f $1/$1.yml $4
+    docker-compose -p $container_name -f $1/docker-compose.yml $4
 fi

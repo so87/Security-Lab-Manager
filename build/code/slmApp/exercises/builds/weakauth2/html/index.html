@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+<head>
+
+<meta charset ="utf-8">
+<style type="text/css">
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.background {
+	width: 100%;
+	max-width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+.nav {
+	margin-top: 45px;
+	width: 20%;
+	float: left;
+}
+.nav a {
+	text-align: center;
+	width: 100%;
+	float: left;
+	text-decoration: none;
+	color: white;
+	background-color: #52237F;
+	margin: 0 80% 10% 20%;
+	padding: 4% 10%;
+	font-size: 20px;
+}
+
+.body {
+	width: 50%;
+	margin: 3%;
+	padding: 2%;
+	float: right;
+	background-color: rgb(255,255,255,.7);
+	overflow: auto;
+}
+.body h1 {
+	text-align: center;
+	color: #52237F;
+}
+.pics {
+	width: 100%;
+}
+.picbox {
+	width: 30%;
+	margin: 1.5%;
+	float: left;
+	text-align: center;
+}
+.picbox img {
+	margin-bottom: -5px;
+	width: 100%;
+}
+.picbox h3 {
+	color: white;
+	margin: 0;
+	padding: 10px 0;
+	background-color: #52237F;
+}
+.popover {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+	color: white;
+}
+
+.popover img {
+	width: 30%;
+	margin-left: 35%;
+	margin-top: 30px;
+}
+.popover h3 {
+	width: 40%;
+	margin-top: 10px;
+	margin-left: 30%;
+	text-align: center;
+	background-color: #52237F;
+	padding: 20px 0;
+}
+.popover p {
+	width: 60%;
+	margin-left: 20%;
+	margin-bottom: 5%;
+	font-size: 18px;
+}
+
+.close {
+	width: 5%;
+	position: absolute;
+	top: 25px;
+	right: 28%;
+	text-decoration: underline;
+}
+
+</style>
+<title>Weak Auth 2 - Hack Away!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<img src="hogwarts.jpg" class="background">
+
+<script type="text/javascript">
+$("document").ready(function(){
+    $(".picbox").click(function(){
+		$(this).next().fadeIn(1000);
+    });
+	$(".close").click(function(){
+		$(".popover").fadeOut(1000);
+	});
+});
+</script>
+
+<div class="nav"> <!--Highlight orange, transparent white background, purple text,-->
+		<a href="#">The Philosopher's Stone</a>
+		<a href="#">The Chamber of Secrets</a>
+		<a href="#">The Prisoner of Azkaban</a>
+		<a href="#">The Goblet of Fire</a>
+		<a href="#">The Order of the Phoenix</a>
+		<a href="#">The Half-Blood Prince</a>
+		<a href="#">The Deathly Hallows</a>
+</div>>
+
+<div class="body">
+	<h1>The Cursed Job</h1>
+	<p>It’s said that the post of Defence Against the Dark Arts is ‘cursed’. For year after year, disaster after disaster, the job of Defence Against the Dark Arts professor has (mostly) been filled by some of the worst candidates to ever grace a classroom; the kind of suspected frauds and dangerous criminals that would send Ofsted into a full-blown meltdown.</p>
+	<p>But which one was the worst? Which Defence Against the Dark Arts teacher fully lived up to the role’s curse, and should never be allowed near children ever again? And which ones were actually alright?</p>
+	<p>Let’s rank them and find out: from best to worst.</p>
+	<div class="pics">
+		<div class="picbox">
+			<img src="quirrell.jpg">
+			<h3>Professor Quirrell</h3>
+		</div>
+		<div class="popover">
+			<img src="quirrell.jpg">
+			<a class="close">Close</a>
+			<h3>Professor Quirrell</h3>
+			<p>Although Professor Quirrell seemed quite harmless at first, what with his nervous tics and his turban, we do have one very small reason why Quirrell might be the worst of the bunch.</p>
+			<p>This was not because of his slightly jumpy demeanour, or his classrooms always smelling of garlic or the fact he seemed to be scared of absolutely everything, but because he literally had Lord Voldemort on the back of his head. Yep, he had one of the Darkest wizards in wizarding history on the back of his head. And we feel it’s fair to say that having Lord Voldemort on the back of your head may just be the worst way possible to teach Defence Against the Dark Arts. Ever.</p>
+		</div>
+
+		<div class="picbox">
+			<img src="lockhart.jpg">
+			<h3>Gilderoy Lockhart</h3>
+		</div>
+		<div class="popover">
+			<img src="lockhart.jpg">
+			<a class="close">Close</a>
+			<h3>Gilderoy Lockhart</h3>
+			<p>Gilderoy Lockhart wasn’t an evil wizard, but he wasn’t a particularly good one either. For not only was he a raging con-artist, a ‘hero’ who had built his reputation on fraud and lies, but he was dangerous too, willing to go to desperate lengths to protect his fame. (Well, when he could actually get a spell right, that was.)</p>
+			<p>Naturally, given that he was a charlatan, Lockhart’s time as Defence Against the Dark Arts teacher was an incompetent shambles – one in which the class learned more about him than the Dark Arts.</p>
+			<p>Take his first class, for example, which kicked off with a quiz about himself, right before he let loose a cage of Cornish Pixies on innocent children. After this little faux pas, the rest of term would consist of reading from his own books, and re-enacting them with the (reluctant) help of Harry. In fact, by the end of the year the class had hardly learned anything about actual defence, which kind of raises questions about Dumbledore’s decision to hire him – a bid, perhaps, to expose his fraudulence? Just what kind of school is this?</p>
+		</div>
+
+		<div class="picbox">
+			<img src="lupin.jpg">
+			<h3>Remus Lupin</h3>
+		</div>
+		<div class="popover">
+			<img src="lupin.jpg">
+			<a class="close">Close</a>
+			<h3>Remus Lupin</h3>
+			<p>Seeing as we’re counting down to the worst Defence Against the Dark Arts teacher, we’re going to start with the best: Remus Lupin, a wizard whose bravery, kindness and patience made him one of the finest professors at Hogwarts – and, as far as we saw, the only decent one to teach Defence Against the Dark Arts.</p>
+			<p>Lupin’s classes were a fun and inventive breath of fresh air; he taught the third years how to fight dark creatures such as Hinkypunks and Boggarts, and set them a monster-filled obstacle course as an exam. Fun! Then there was his dedication to Harry Potter, who he taught in private to cast the Patronus Charm. But, of course, there was no escaping the job’s curse; Lupin was revealed as a werewolf and resigned the position before the influx of owls from outraged parents flooded in. An irony, given some of their childrens’ other Defence Against the Dark Arts professors…</p>
+		</div>
+
+		<div class="picbox">
+			<img src="moody.jpg">
+			<h3>Mad-Eye Moody</h3>
+		</div>
+		<div class="popover">
+			<img src="moody.jpg">
+			<a class="close">Close</a>
+			<h3>Mad-Eye Moody</h3>
+			<p>The strange thing about Alastor Moody (or rather, Barty Crouch Jr pretending to be Alastor Moody) is that he was actually a rather informative Defence Against the Dark Arts professor.</p>
+			<p>A little bold perhaps (he did, after all, demonstrate the Unforgivable Curses in his very first lesson), but he was also an engrossing speaker, and certainly taught Harry and his classmates a thing or two. It’s just a shame that he was only pretending; that his eagerness to help Harry was only part of a scheme to rig the Triwizard Tournament. Still, if you take away all the connection-to-Voldemort stuff, maybe it was a good impression of what a real Mad-Eye Defence Against the Dark class would really be like.</p>
+		</div>
+
+		<div class="picbox">
+			<img src="umbridge.jpg">
+			<h3>Dolores Umbridge</h3>
+		</div>
+		<div class="popover">
+			<img src="umbridge.jpg">
+			<a class="close">Close</a>
+			<h3>Dolores Umbridge</h3>
+			<p>As Defence Against the Dark Arts teacher, Professor Umbridge managed to vacuum up all the useful parts of Harry’s lessons by thrusting the students’ noses in textbooks instead of action, denying the return of Lord Voldemort and, perhaps worst of all, punctuating every sentence with a cutesy giggle.</p>
+			<p>Her saccharine and sugary ways were more arguably more brutal than the Carrows’ tenure, and it wasn’t long before her girly pink robes and love of cats made way for a sinister, truly evil piece of work; doing everything in her power to stifle Harry and his friends from defending themselves against the darkening world. Without even raising her wand, Dolores Umbridge’s never-ending Educational Decrees and her quite literally scarring detention sessions with Harry have earned her a very well-deserved title of the second-worst Defence Against the Dark Arts teacher.</p>
+		</div>
+
+		<div class="picbox">
+			<img src="snape.jpg">
+			<h3>Serverus Snape</h3>
+		</div>
+		<div class="popover">
+			<img src="snape.jpg">
+			<a class="close">Close</a>
+			<h3>Snape</h3>
+			<p>As revealed at the end of Deathly Hallows, Professor Snape was secretly one of the bravest and most noble men Harry ever knew. But that doesn’t mean that he was the most breezy and easy-going of teachers.</p>
+			<p>We all saw how he was in Potions, after all, and then there’s just Snape’s personality in general. In fact, Dumbledore held off giving him the job for so many years thinking it would bring out the worst in him – you know, all that company he kept with Dark wizards.</p>
+			<p>But in comparison to some of Harry’s other teachers, Snape was at the very least dedicated, firm and very qualified. Well, maybe a little too qualified, judging by his first lesson speech calling the Dark Arts ‘unfixed, mutating, indestructible’. Calm down, Snape.</p>
+			<p>Nonetheless, in a year where Voldemort was on the ascent – who better than Voldemort’s very own double-spy to teach the class? It could’ve been a good gig for Snape, if only he hadn’t had that pesky Unforgiveable Vow promising to kill his boss…</p>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+</div>
+
+
+</body>
+</html>

@@ -5,17 +5,20 @@ bugs
 4. setting too many cpu just slilently fails
 5. replicas and stack aren't support because docker-compose up is used to start
 6. duplicate css
-7. johndoe submitted label not green
 8. get home deploy to work (permissions being weird)
 9. users can't view gradebook, but they can send out the email
-10. does not turn off exercise on logout
 
 todo
 ----
-create weak authentication (just redirect)
 c++ hard coded password
-create hard coded password(checks a static file)
-create xss1 bypass html filter exercise
+    get ssh to work
+    get c++ application on there
+    application has root sticky bit
+    see how to copy back to my computer
+    see if can load into x64dbg
+weakauth2 - create hard coded password(checks a static file)
+weakauth3 - web privilege escalation
+xss1 - create xss1 bypass html filter exercise
 
 ---------------------- Requirements finished------------------------------------------------ 
 
@@ -52,5 +55,4 @@ cross site forgory exercise
 sql injection exercise
 buffer overflow exercise
 format string exercise
-web privilege escalation
 web file upload
