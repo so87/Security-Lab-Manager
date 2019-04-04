@@ -11,15 +11,16 @@ bugs
 todo
 ----
 c++ hard coded password
-    get ssh to work
-    get c++ application on there
-    application has root sticky bit
-    see how to copy back to my computer
-    see if can load into x64dbg
+    (figure out why segmentation fault)application prints out root text
 weakauth2 - create hard coded password(checks a static file)
 weakauth3 - web privilege escalation
+    get site from joe
+    make signup page
+    post request to admin page to cat root.txt
 xss1 - create xss1 bypass html filter exercise
-
+update database documentation
+update poster to look nice
+update proposal documentation
 ---------------------- Requirements finished------------------------------------------------ 
 
 Enhancements
@@ -28,6 +29,7 @@ create multiple choice question exercises
 travis ci auto test and post go github page
 travis ci auto format all files
 travis ci setup private sonarqube and anchore engine
+clean up sonarqube findings
 nightly deploy to home network
 import other people's docker containers
 compare answers on virtual machines to see if people are cheating
@@ -47,6 +49,7 @@ import full vmware or virtual box virtual machines
 auto generate docker containers via GUI form (web or ssh)
 imput your own email settings
 only send individual grades to people
+
 
 Addiontal Exercises
 --------------------------------------------------------------------------------------------

@@ -8,4 +8,5 @@ docker-compose exec web-django python manage.py shell -c "from slmApp.models imp
 docker-compose exec web-django python manage.py shell -c "from slmApp.models import Exercises; Exercises.objects.create(name='Weak Auth 1',description = 'The login page is broken! Find out how to get the secret key!')"
 docker-compose exec web-django python manage.py shell -c "from slmApp.models import Exercises; Exercises.objects.create(name='Weak Auth 2',description = 'How does the login page work?')"
 docker-compose exec web-django python manage.py shell -c "from slmApp.models import Exercises; Exercises.objects.create(name='Weak Auth 3',description = 'You might be able to execute some privileged actions')"
+docker-compose exec web-django python manage.py shell -c "from slmApp.models import Exercises; Exercises.objects.create(name='C_Weak Auth 1',description = 'The C application has hard coded username and password')"
 docker-compose down

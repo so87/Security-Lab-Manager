@@ -351,6 +351,8 @@ def create_data():
     wa2.save()
     wa3 = Exercises.objects.create(name='Weak Auth 3', description='You might be able to execute some privileged actions')
     wa3.save()
+    cwa1 = Exercises.objects.create(name='C_Weak Auth 1', description='The application has hard coded credentials.')
+    cwa1.save()
     e3 = Exercises.objects.create(name='XSS 1', description='Bypass the HTML input filter. An admin is trying to login every 30seconds!')
     e3.save()
 
@@ -376,6 +378,7 @@ def create_data():
     c2.exercises.add(wa1)
     c2.exercises.add(wa2)
     c2.exercises.add(wa3)
+    c2.exercises.add(cwa1)
     c2.students.add(u4)
     c2.students.add(u5)
     c2.students.add(u6)
