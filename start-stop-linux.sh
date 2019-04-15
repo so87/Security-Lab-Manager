@@ -16,7 +16,7 @@ if [[ $1 == "start" ]]; then
         docker-compose up
     elif [[ $2 == "prod" ]]; then
         export RUN_ENV="bash -c 'sh deploy_prod.sh && sh start-django.sh'"
-        docker-compose up
+        docker-compose up -d
     elif [[ $2 == "simon" ]]; then	
         export RUN_ENV="bash -c 'sh /code/deploy_prod.sh && sh ./start-django.sh'"
         docker-compose -f docker-compose-simon.yml up
