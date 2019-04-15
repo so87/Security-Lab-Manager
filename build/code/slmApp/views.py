@@ -1,6 +1,8 @@
 import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import user_passes_test
+from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -50,7 +52,7 @@ def SignupView(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 def SignupAdminView(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_superuser == True:
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
@@ -78,9 +80,10 @@ def StudentView(request):
     return render(request, 'student.html', {'classes': classes, 'form': form, 'submitted_exercises':submitted_exercises, 'settings':settings})
 @login_required
 def InstructorView(request):
-    classes = Classes.objects.filter(instructor=request.user)
-    setting = Settings.objects.get(pk=1)
-    return render(request, 'admin.html', {'classes': classes, 'setting':setting})
+    if request.user.is_superuser == True:
+        classes = Classes.objects.filter(instructor=request.user)
+        setting = Settings.objects.get(pk=1)
+        return render(request, 'admin.html', {'classes': classes, 'setting':setting})
 
 # submitting answers to the exercises
 @login_required
@@ -100,7 +103,7 @@ def SubmitExerciseView(request, Cpk, Epk):
 
 @login_required
 def SubmissionsView(request, Cpk, Epk):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_superuser == True:
         submissions = Submissions.objects.filter(classes=Cpk).filter(exercises=Epk)
         return render(request, 'details_submissions.html', {'submissions': submissions})
 def getGrades(Cpk):
@@ -153,81 +156,99 @@ def getGrades(Cpk):
 
 @login_required
 def GradebookView(request, Cpk):
-    classes = Classes.objects.get(pk=Cpk)
-    grades  = getGrades(Cpk)
-    return render(request, 'details_gradebook.html', {'classes': classes, 'grades':grades,})
+    if request.user.is_superuser == True:
+        classes = Classes.objects.get(pk=Cpk)
+        grades  = getGrades(Cpk)
+        return render(request, 'details_gradebook.html', {'classes': classes, 'grades':grades,})
 
 @login_required
 def GradebookEmail(request, Cpk):
-    # get grades
-    grades = getGrades(Cpk)
-    # returns if it was successful or not
-    status = send_mail.send_grades(Cpk, grades, request)
-    return render(request, 'gradebook_email_status.html', {'status':status})
+    if request.user.is_superuser == True:
+        # get grades
+        grades = getGrades(Cpk)
+        # returns if it was successful or not
+        status = send_mail.send_grades(Cpk, grades, request)
+        return render(request, 'gradebook_email_status.html', {'status':status})
 
 # Viewing Database Items
 @login_required
 def StudentsView(request):
-    students = CustomUser.objects.all()
-    return render(request, 'details_students.html', {'students': students})
+    if request.user.is_superuser == True:
+        students = CustomUser.objects.all()
+        return render(request, 'details_students.html', {'students': students})
 @login_required
 def ExercisesView(request):
-    exercises = Exercises.objects.all()
-    return render(request, 'details_exercises.html', {'exercises': exercises})
+    if request.user.is_superuser == True:
+        exercises = Exercises.objects.all()
+        return render(request, 'details_exercises.html', {'exercises': exercises})
 @login_required
 def ClassesView(request):
-    classes = Classes.objects.all()
-    return render(request, 'details_classes.html', {'classes': classes})
+    if request.user.is_superuser == True:
+        classes = Classes.objects.all()
+        return render(request, 'details_classes.html', {'classes': classes})
 
 # Editing Database Items
+@method_decorator(login_required, name='dispatch')
 class ClassesCreate(CreateView):
     model = Classes
     fields = '__all__'
 
+@method_decorator(login_required, name='dispatch')
 class ClassesUpdate(UpdateView):
     model = Classes
     fields = '__all__'
 
+@method_decorator(login_required, name='dispatch')
 class ClassesDelete(DeleteView):
     model = Classes
     fields = '__all__'
     success_url = reverse_lazy('instructor')
 
+@method_decorator(login_required, name='dispatch')
 class ClassesDetailView(generic.DetailView):
     model = Classes
 
+@method_decorator(login_required, name='dispatch')
 class ExercisesCreate(CreateView):
     model = Exercises
     fields = '__all__'
 
+@method_decorator(login_required, name='dispatch')
 class ExercisesUpdate(UpdateView):
     model = Exercises
     fields = '__all__'
 
+@method_decorator(login_required, name='dispatch')
 class ExercisesDelete(DeleteView):
     model = Exercises
     fields = '__all__'
     success_url = reverse_lazy('instructor')
 
+@method_decorator(login_required, name='dispatch')
 class ExercisesDetailView(generic.DetailView):
     model = Exercises
 
+@method_decorator(login_required, name='dispatch')
 class CustomUserCreate(CreateView):
     model = CustomUser
     fields = '__all__'
 
+@method_decorator(login_required, name='dispatch')
 class CustomUserUpdate(UpdateView):
     model = CustomUser
     fields = '__all__'
 
+@method_decorator(login_required, name='dispatch')
 class CustomUserDelete(DeleteView):
     model = CustomUser
     fields = '__all__'
     success_url = reverse_lazy('instructor')
 
+@method_decorator(login_required, name='dispatch')
 class StudentsDetailView(generic.DetailView):
     model = CustomUser
 
+@method_decorator(login_required, name='dispatch')
 class SettingsUpdate(UpdateView):
     model = Settings
     fields = '__all__'
@@ -235,11 +256,13 @@ class SettingsUpdate(UpdateView):
 
 @login_required
 def UpdateSettings(request):
-    setting = Settings.objects.get(pk=1)
-    update_settings.update_instances(setting.instances)
-    update_settings.update_ram_and_cpu(setting.ram,setting.cores)
-    return redirect('instructor')
+    if request.user.is_superuser == True:
+        setting = Settings.objects.get(pk=1)
+        update_settings.update_instances(setting.instances)
+        update_settings.update_ram_and_cpu(setting.ram,setting.cores)
+        return redirect('instructor')
 
+@method_decorator(login_required, name='dispatch')
 class SettingsDetailView(generic.DetailView):
     model = Settings
 
