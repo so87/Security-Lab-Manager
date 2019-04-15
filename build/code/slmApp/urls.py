@@ -32,8 +32,8 @@ urlpatterns = [
     
     path('instructor/students/', views.StudentsView, name='students'),
     path('instructor/students/<int:pk>', views.StudentsDetailView.as_view(), name='customuser-detail'),
-    path('instructor/students/<int:pk>/update/', views.CustomUserUpdate.as_view(), name='customUser_update'),
-    path('instructor/students/<int:pk>/delete/', views.CustomUserDelete.as_view(), name='customUser_delete'),
+    path('instructor/students/<int:pk>/update/', views.CustomUserUpdate.as_view(), name='customuser_update'),
+    path('instructor/students/<int:pk>/delete/', views.CustomUserDelete.as_view(), name='customuser_delete'),
     path('instructor/students/create/', views.CustomUserCreate.as_view(), name='customUser_create'),
     
     path('student/submit/<int:Cpk>/<int:Epk>', views.SubmitExerciseView, name='submit'),
