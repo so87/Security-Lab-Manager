@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <termios.h> // in gcc, use < conio.h > in turboc
 #include <string.h>
- 
+#include <errno.h>
+
 #define USERNAME    "jimraynor"
-#define PASSWORD    "keriganbrokemyheart77"
+#define PASSWORD    "keriganbrokemyheart"
  
 static struct termios old, new;
  
@@ -70,23 +72,30 @@ void getPassword(char *pass)
  
 int main()
 {
- 
     char user[30],pass[30];
     printf("Enter User Name :");
     gets(user);
     printf("Enter Password  :");
     getPassword(pass);
-     
     if(strcmp(user,USERNAME)==0 && strcmp(pass,PASSWORD)==0){
         printf("\nLOGIN SUCCESS.\n");
-        printf("The root key is displayed below");
-        FILE *file  = fopen("/root/root.text", "r"); // read only
-        char line [ 1024 ]; /* or other suitable maximum line size */
-        while ( fgets ( line, sizeof line, file ) != NULL ) /* read a line */
-        {
-            fputs ( line, stdout ); /* write the line */
+        printf("The root key is displayed below\n");
+        FILE *output;
+        output = fopen("/root/root.txt", "r"); // read only
+        if(!output){
+        //handle the error
+         printf("something went wrong: %s", strerror(errno));
+         exit(1);
         }
-        fclose ( file );
+        
+        char c; /* or other suitable maximum line size */
+        c = fgetc(output);
+        while (c != EOF) 
+        { 
+        printf ("%c", c);
+        c = fgetc(output); 
+        }
+        fclose(output);
     }
     else
         printf("\nLOGIN FAILED.\n");

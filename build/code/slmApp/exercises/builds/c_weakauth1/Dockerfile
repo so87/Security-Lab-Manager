@@ -17,7 +17,7 @@ RUN rm /home/slm/app.c
 RUN chmod u+s /home/slm/app
 
 #copy over the flag
-COPY root.txt /root/
+COPY root.txt /root/root.txt
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

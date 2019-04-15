@@ -3,8 +3,13 @@
 
 <head>
 <style>
-
+html {
+  position: relative;
+  height: 100%;
+}
 body {
+    position: relative;
+    height: 100%;
     margin: 0;
     padding: 0;
     {% load static %}
@@ -15,7 +20,7 @@ body {
     width: 100%;
     height: 100px;
     background-color: #09395D;
-    opacity: .5;
+    opacity: .8;
     border-style: solid; 
     border-radius: 0 0 20px 20px;
     border-width: 0 0 5px 0;
@@ -32,10 +37,12 @@ body {
 
 .footer {
   width: 100%;
+  position: fixed;
+  bottom: 0;
   height: 100px;
   clear: both;
   background-color: #09395D;
-  opacity: .2;
+  opacity: .7;
   border-style: solid; 
   border-radius: 20px 20px 0 0;
   border-width: 5px 0 0 0;
